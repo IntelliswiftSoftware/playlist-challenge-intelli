@@ -6,3 +6,23 @@ Start Server
 3. npm start
 4. Server should start on PORT 3000
 5. Check on browser - http://localhost:3000/myPlaylistApi
+6. By default - GraphiQL - Useful for Debugging api will open
+7. Please check the request and response data as below
+
+Request:
+
+query {
+  songsPlayList
+}
+
+Response:
+{
+  "data": {
+    "songsPlayList": [
+      "Song 1",
+      "Song 2",
+      "Song 3",
+      "Song 4"
+    ]
+  }
+}
