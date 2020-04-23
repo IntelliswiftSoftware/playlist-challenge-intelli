@@ -1,1 +1,8 @@
-Demo Project
+Start Server
+-------------
+
+1. Navigate to server directory
+2. npm i
+3. npm start
+4. Server should start on PORT 3000
+5. Check on browser - http://localhost:3000/myPlaylistApi
