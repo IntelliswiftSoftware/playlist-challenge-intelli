@@ -10,7 +10,7 @@ class App {
     this.app = express();
     this.app.use(bodyParser.json());
     this.app.use('/myPlaylistApi', myPlaylistApiSchema);
-    this.mountRoutes()
+    this.mountRoutes();
   }
 
   private mountRoutes (): void {
