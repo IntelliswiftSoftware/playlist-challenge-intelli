@@ -4,15 +4,17 @@ import {
   } from 'graphql';
 
 import QueryMaps from './QueryMaps';
-
+import Users from '../postgress/Users';
 class MutationQuery {
     private db;
     private queryMaps;
     private mutationQuery;
+    private users;
 
-    constructor(db, queryMaps: QueryMaps){
+    constructor(db, queryMaps: QueryMaps, users: Users){
         this.db = db;
         this.queryMaps = queryMaps;
+        this.users = users;
         this.setMutationQuery();
     }
 
@@ -33,20 +35,14 @@ class MutationQuery {
                         age: { type: GraphQLInt },
                         gender: { type: GraphQLString }
                     },
-                    resolve: (parentValue, { id, firstname, lastname, age, gender })  => {
-                        const query = `INSERT INTO users (id, firstname, lastname, age, gender) VALUES (${id}, '${firstname}', '${lastname}', ${age}, '${gender}')`;
-                        return this.db.any(query);
-                    }
+                    resolve: (parentValue, args)  => this.users.insertUser(args)
                 },
                 deleteUser: {
                     type: this.queryMaps.UserType,
                     args: {
-                        id: { type: new GraphQLNonNull( GraphQLID )} 
+                        id: { type: new GraphQLNonNull( GraphQLID )}
                     },
-                    resolve: (parentValue, args) => {
-                        const query = `DELETE FROM users WHERE id=${args.id}`;
-                        return this.db.any(query);
-                    }
+                    resolve: (parentValue, args) => this.users.deleteUser(args)
                 }
             }
         })

@@ -3,16 +3,21 @@ import {
   } from 'graphql';
 
 import QueryMaps from './QueryMaps';
-
+import Users from '../postgress/Users';
+import Playlist from '../postgress/Playlist';
 class RootQuery {
 
     private db; 
     private queryMaps;
     private rootQuery;
+    private users;
+    private playlist;
 
-    constructor(db, queryMaps: QueryMaps){
+    constructor(db, queryMaps: QueryMaps, users: Users, playlist: Playlist){
         this.db = db;
         this.queryMaps = queryMaps;
+        this.users = users;
+        this.playlist = playlist;
         this.setRootQuery();
     }
 
@@ -27,18 +32,12 @@ class RootQuery {
                 user:{
                     type: this.queryMaps.UserType,
                     args: { id: { type: GraphQLID }},
-                    resolve: (parentValue, args) => {
-                        const query = `SELECT * FROM users WHERE id = ${args.id}`;
-                        return this.db.one(query);
-                    }
+                    resolve:(parentValue, args) => this.users.getUserById(args.id)
                 },
                 playlists:{
                     type: this.queryMaps.PlaylistType,
                     args: { id: { type: GraphQLID }},
-                    resolve: (parentValue, args) => {
-                        const query = `SELECT * FROM playlist WHERE playlistid = ${args.id}`;
-                        return this.db.one(query);
-                    }
+                    resolve: (parentValue, args) => this.playlist.getPlaylistByPlaylistid(args.id)
                 }
             }
         });

@@ -3,16 +3,17 @@ import {
     GraphQLInt, GraphQLList
   } from 'graphql';
 
+  import Playlist from '../postgress/Playlist';
 
 class QueryMaps {
     public UserType;
     public PlaylistType;
     private db;
+    private playlist;
 
-    constructor(db){
-        
+    constructor(db, playlist: Playlist){
         this.db = db;
-
+        this.playlist = playlist;
         this.UserType = new GraphQLObjectType({
             name: 'User',
             fields: ()=>({
@@ -23,10 +24,7 @@ class QueryMaps {
                 gender: { type: GraphQLString },
                 playlists: {
                     type: new GraphQLList(this.PlaylistType),
-                    resolve: (parentValue, args) => {
-                        const query = `SELECT * FROM playlist WHERE userid = ${ parentValue.id }`;
-                        return this.db.many(query);
-                    }
+                    resolve: (parentValue, args) => this.playlist.getPlaylistByUserId(parentValue.id)
                 }
             })
         });
@@ -39,10 +37,8 @@ class QueryMaps {
                 isprivate: { type: GraphQLBoolean}
             })
         })
-        
+
     }
-
-
 }
 
 export default QueryMaps;
