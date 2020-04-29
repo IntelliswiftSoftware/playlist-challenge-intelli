@@ -1,7 +1,8 @@
 import express from 'express';
 import bodyParser from 'body-parser';
+import expressGraphQL from 'express-graphql';
 
-import myPlaylistApiSchema from './graphql/myPlaylistApi';
+import PlaylistSchema from './graphql/PlaylistSchema';
 
 class App {
   public app
@@ -9,7 +10,12 @@ class App {
   constructor () {
     this.app = express();
     this.app.use(bodyParser.json());
-    this.app.use('/myPlaylistApi', myPlaylistApiSchema);
+
+    this.app.use('/songPlaylist', expressGraphQL({
+      schema: new PlaylistSchema().getSchema(),
+      graphiql: true
+    }));
+    
     this.mountRoutes();
   }
 
