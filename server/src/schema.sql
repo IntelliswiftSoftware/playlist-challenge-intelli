@@ -3,6 +3,14 @@ DROP DATABASE song_playlist;
 
 CREATE DATABASE song_playlist;
 
+CREATE TABLE images (
+id serial PRIMARY KEY, 
+low varchar(1000) NOT NULL,
+mid varchar(1000) NOT NULL,
+high varchar(1000) NOT NULL
+);
+
+
 CREATE TABLE users (
 id serial PRIMARY KEY, 
 firstname varchar(40) NOT NULL, 
@@ -22,14 +30,6 @@ userId integer REFERENCES users (id),
 imageId integer REFERENCES images (id),
 createDate timestamp NOT NULL,
 modifiedDate timestamp NOT NULL
-);
-
-
-CREATE TABLE images (
-id serial PRIMARY KEY, 
-low varchar(1000) NOT NULL,
-mid varchar(1000) NOT NULL,
-high varchar(1000) NOT NULL
 );
 
 CREATE TABLE song_categories (

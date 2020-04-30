@@ -1,12 +1,12 @@
+
+INSERT INTO images (low, mid, high) VALUES ('http://getwallpapers.com/wallpaper/full/c/c/6/1457223-beautiful-song-wallpapers-1920x1080-windows-xp.jpg', 'http://getwallpapers.com/wallpaper/full/c/c/6/1457223-beautiful-song-wallpapers-1920x1080-windows-xp.jpg', 'http://getwallpapers.com/wallpaper/full/c/c/6/1457223-beautiful-song-wallpapers-1920x1080-windows-xp.jpg');
+
 INSERT INTO users (firstname, lastname, password, age, gender, imageId, createDate) VALUES ('Tom', 'Hanks', 'test', 40, 'Male', 1, now());
 INSERT INTO users (firstname, lastname, password, age, gender, imageId, createDate) VALUES ('jomi', 'banks', 'best', 40, 'Female', 1, now());
 
 
 INSERT INTO playlists (title, userId, imageId, createDate, modifiedDate) VALUES ('90 Songs', 1, 1, now(), now());
 INSERT INTO playlists (title, userId, imageId, createDate, modifiedDate) VALUES ('New Songs', 2, 1, now(), now());
-
-
-INSERT INTO images (low, mid, high) VALUES ('http://getwallpapers.com/wallpaper/full/c/c/6/1457223-beautiful-song-wallpapers-1920x1080-windows-xp.jpg', 'http://getwallpapers.com/wallpaper/full/c/c/6/1457223-beautiful-song-wallpapers-1920x1080-windows-xp.jpg', 'http://getwallpapers.com/wallpaper/full/c/c/6/1457223-beautiful-song-wallpapers-1920x1080-windows-xp.jpg');
 
 INSERT INTO song_categories (name, description, imageId, isMood) VALUES ('classical', 'traditional indian', 1, false);
 INSERT INTO song_categories (name, description, imageId, isMood) VALUES ('Sad', 'Sad songs', 1, true);

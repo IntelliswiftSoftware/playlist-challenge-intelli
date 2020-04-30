@@ -1,6 +1,15 @@
 export const tableNames = {
-    PLAYLIST: 'playlist',
-    USERS: 'users'
+    PLAYLIST: 'playlists',
+    USERS: 'users',
+    IMAGES: 'images',
+    SONG_CATEGORIES: 'song_categories ',
+    ARTISTS: 'artists ',
+    SONGS: 'songs ',
+    ALBUM: 'album ',
+    ALBUM_SONGS: 'album_songs ',
+    PLAYLIST_SONGS: 'playlist_songs ',
+    SONGS_LIKES_MAP: 'songs_likes_map ',
+    SONGS_PLAY_HISTORY: 'songs_play_history'
 }
 
 export const connectionObject = {

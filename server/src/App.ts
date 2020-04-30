@@ -36,6 +36,7 @@ class App {
 
       this.objectFactory.getUsersDao().getUserByIdPassword(username, password).then(data => {
          if ( data && typeof data === 'object' && data.id === req.body.username ) {
+            delete data.createdate;
             res.end(JSON.stringify(data));
          } else {
             res.statusCode = 401;

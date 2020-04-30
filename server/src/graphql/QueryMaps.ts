@@ -28,12 +28,14 @@ class QueryMaps {
                 }
             })
         });
-
+ 
         this.PlaylistType = new GraphQLObjectType({
             name: 'Playlist',
             fields: ()=>({
                 id: { type: GraphQLID },
                 title: { type: GraphQLString },
+                imageId: { type: GraphQLInt },
+                userId: { type: GraphQLInt },
                 songs: {
                     type: new GraphQLList(this.SongType),
                     resolve: (parentValue, args) => this.objectFactory.getSongsDao().getPlayListSongs(parentValue.id)

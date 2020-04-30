@@ -18,7 +18,7 @@ class AppSchema {
         this.db = objectFactory.getDbInstance();
         this.users =  objectFactory.getUsersDao();
         this.playlist = objectFactory.getPlayListsDao();
-        this.queryMaps = new QueryMaps(this.playlist);
+        this.queryMaps = new QueryMaps(objectFactory);
         this.setSchema();
     }
 

@@ -1,3 +1,5 @@
+import { tableNames } from '../constants/dbConstants';
+
 class Users {
     private db;
 
@@ -6,17 +8,17 @@ class Users {
     }
 
     public insertUser(args) {
-        const query = `INSERT INTO users (id, firstname, lastname, age, gender) VALUES (${args.id}, '${args.firstname}', '${args.lastname}', ${args.age}, '${args.gender}')`;
+        const query = `INSERT INTO ${tableNames.USERS} (id, firstname, lastname, age, gender) VALUES (${args.id}, '${args.firstname}', '${args.lastname}', ${args.age}, '${args.gender}')`;
         return this.db.any(query);
     }
 
     public deleteUser(userId: number) {
-        const query = `DELETE FROM users WHERE id=${userId}`;
+        const query = `DELETE FROM ${tableNames.USERS} WHERE id=${userId}`;
         return this.db.any(query);
     }
 
     public getUserById(userId: number) {
-        const query = `SELECT * FROM users WHERE id = ${userId}`;
+        const query = `SELECT * FROM ${tableNames.USERS} WHERE id = ${userId}`;
         return this.db.one(query);
     }
 
@@ -26,8 +28,7 @@ class Users {
     }
 
     public getUserByIdPassword(userId: number, password: string) {
-        const query = `SELECT * FROM users WHERE id = ${userId} and password ='${password}'`;
-        console.log(query);
+        const query = `SELECT * FROM ${tableNames.USERS} WHERE id = ${userId} and password ='${password}'`;
         return this.db.one(query);
     }
 }
