@@ -8,7 +8,7 @@ export const connectionObject = {
     port: 5432,
     database: 'song_playlist',
     user: 'postgres',
-    password: 'root',
+    password: 'codemaster',
     max: 30,
     poolIdleTimeout: 10000 
 }

@@ -13,6 +13,17 @@ class Playlist {
         return this.db.one(query);
     }
 
+    public insertPlaylist(playListId:number, title:string, userId:number) {
+        const createDate = 23;
+        const query = `INSERT INTO playlist (playListId, title, userId, createDate) VALUES (${playListId}, '${title}', '${userId}', ${createDate})`;
+        return this.db.any(query);
+    }
+    public insertSongToPlaylist(playListId:number, songId:number) {
+        const id = 23;
+        const query = `INSERT INTO playlist_songs (id, songId, playlistId) VALUES (${id}, '${songId}', '${playListId}')`;
+        return this.db.one(query);
+    }
+
 }
 
 export default Playlist;

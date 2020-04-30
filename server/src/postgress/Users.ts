@@ -19,5 +19,10 @@ class Users {
         const query = `SELECT * FROM users WHERE id = ${userId}`;
         return this.db.one(query);
     }
+
+    public getSongsLiked(userId) {
+        const query = `SELECT * FROM songs where id in ( select songId from songs_likes_map WHERE userId = ${userId})`;
+        return this.db.one(query);
+    }
 }
 export default Users;
