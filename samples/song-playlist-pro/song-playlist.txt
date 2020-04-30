@@ -4,7 +4,7 @@ CREATE DATABASE song_playlist;
 
 \c song_playlist;
 
-\conninfo;
+\conninfo
 You are connected to database "song_playlist" as user "postgres" on host "localhost" (address "::1") at port "5432".
 
 CREATE TABLE users (
@@ -17,7 +17,6 @@ gender varchar(20) NOT NULL );
 INSERT INTO users (id, firstName, lastName, age, gender) VALUES (1001, 'Tom', 'Hanks', 40, 'Male');
 INSERT INTO users (id, firstName, lastName, age, gender) VALUES (1002, 'Morgan', 'Freeman', 50, 'Male');
 INSERT INTO users (id, firstName, lastName, age, gender) VALUES (1003, 'Denzel', 'Washington', 45, 'Male');
-INSERT INTO users (id, firstname, lastname, age, gender) VALUES (1004, "Tom", "Cruise", 65, "Male" )
 
 SELECT * FROM users;
 
