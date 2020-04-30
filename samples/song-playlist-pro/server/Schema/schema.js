@@ -40,6 +40,19 @@ const UserType = new GraphQLObjectType({
     })
 })
 
+// const AllUsersType = new GraphQLObjectType({
+//     name: 'AllUsers',
+//     fields: ()=>({
+//         users: {  
+//             type: new GraphQLList(UserType),
+//             resolve(parentValue, args){
+//                 console.log('hello', data);
+//                 return data;
+//             }
+//         }
+//     })
+// })
+
 const PlaylistType = new GraphQLObjectType({
     name: 'Playlist',
     fields: ()=>({
@@ -79,7 +92,23 @@ const RootQuery = new GraphQLObjectType({
                         return 'The error is ', err;
                     });
             }
-        }
+        },
+        allUsers:{
+            type: new GraphQLNonNull(new GraphQLList(new GraphQLNonNull(UserType))),
+            args: {},
+            resolve(parentValue, args){
+                const query = `SELECT * FROM users`;
+                return db.conn.many(query)
+                    .then( data => {
+                        // console.log('data ', data)
+                        return data;
+                    })
+                    .catch( err => {
+                        console.log('errr ', err)
+                        return 'The error is ', err;
+                    });
+            }
+        },
     }
 })
 
