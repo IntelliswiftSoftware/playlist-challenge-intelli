@@ -26,7 +26,8 @@ class Users {
     }
 
     public getUserByIdPassword(userId: number, password: string) {
-        const query = `SELECT * FROM users WHERE id = ${userId} and firstName ='${password}'`;
+        const query = `SELECT * FROM users WHERE id = ${userId} and password ='${password}'`;
+        console.log(query);
         return this.db.one(query);
     }
 }

@@ -18,7 +18,7 @@ class App {
       schema: new AppSchema(this.objectFactory).getSchema(),
       graphiql: true
     }));
-    
+
     this.mountRoutes();
   }
 
@@ -29,12 +29,10 @@ class App {
     })
 
     this.app.post('/login',(req, res) => {
-      
-      let username = parseInt(req.body.username);
-      let password =  req.body.password;
+      const username = parseInt(req.body.username);
+      const password =  req.body.password;
 
       res.setHeader('Content-Type','application/json');
-      
 
       this.objectFactory.getUsersDao().getUserByIdPassword(username, password).then(data => {
          if ( data && typeof data === 'object' && data.id === req.body.username ) {
@@ -48,7 +46,6 @@ class App {
           res.end( JSON.stringify({ message: 'Internal server error'}))
        });
       })
-    
   }
 }
 

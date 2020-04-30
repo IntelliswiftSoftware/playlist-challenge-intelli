@@ -10,7 +10,6 @@ class ObjectFactory {
     private usersDao : Users;
     private PlaylistDao : Playlist;
     private SongsDao : Songs;
-    
 
     constructor(){
         this.db = new DbConnector();
