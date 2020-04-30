@@ -7,14 +7,12 @@ import Users from '../postgress/Users';
 import Playlist from '../postgress/Playlist';
 class RootQuery {
 
-    private db; 
     private queryMaps;
     private rootQuery;
     private users;
     private playlist;
 
-    constructor(db, queryMaps: QueryMaps, users: Users, playlist: Playlist){
-        this.db = db;
+    constructor(queryMaps: QueryMaps, users: Users, playlist: Playlist){
         this.queryMaps = queryMaps;
         this.users = users;
         this.playlist = playlist;

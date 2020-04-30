@@ -3,17 +3,17 @@ import {
     GraphQLInt, GraphQLList
   } from 'graphql';
 
-  import Playlist from '../postgress/Playlist';
+
+import ObjectFactory from '../util/ObjectFactory';
 
 class QueryMaps {
     public UserType;
     public PlaylistType;
-    private db;
-    private playlist;
+    private SongType;
+    private objectFactory: ObjectFactory;
 
-    constructor(db, playlist: Playlist){
-        this.db = db;
-        this.playlist = playlist;
+    constructor(objectFactory: ObjectFactory){
+        this.objectFactory = objectFactory;
         this.UserType = new GraphQLObjectType({
             name: 'User',
             fields: ()=>({
@@ -24,7 +24,7 @@ class QueryMaps {
                 gender: { type: GraphQLString },
                 playlists: {
                     type: new GraphQLList(this.PlaylistType),
-                    resolve: (parentValue, args) => this.playlist.getPlaylistByUserId(parentValue.id)
+                    resolve: (parentValue, args) => this.objectFactory.getPlayListsDao().getPlaylistByUserId(parentValue.id)
                 }
             })
         });
@@ -32,11 +32,26 @@ class QueryMaps {
         this.PlaylistType = new GraphQLObjectType({
             name: 'Playlist',
             fields: ()=>({
-                playlistid: { type: GraphQLID },
+                id: { type: GraphQLID },
                 title: { type: GraphQLString },
-                isprivate: { type: GraphQLBoolean}
+                songs: {
+                    type: new GraphQLList(this.SongType),
+                    resolve: (parentValue, args) => this.objectFactory.getSongsDao().getPlayListSongs(parentValue.id)
+                }
             })
         })
+
+        this.SongType = new GraphQLObjectType({
+            name: 'Song',
+            fields: ()=>({
+                id: { type: GraphQLID },
+                artistId: { type: GraphQLInt },
+                imageId: { type: GraphQLString },
+                duration: { type: GraphQLInt },
+                source: { type: GraphQLString },
+                genreId: { type: GraphQLString }
+            })
+        });
 
     }
 }

@@ -15,7 +15,7 @@ createDate timestamp NOT NULL
 
  
 CREATE TABLE playlists (
-playlistId integer PRIMARY KEY, 
+id integer PRIMARY KEY, 
 title varchar(40) NOT NULL,
 userId integer REFERENCES users (id)
 createDate timestamp NOT NULL
@@ -40,7 +40,7 @@ high varchar(1000) NOT NULL
 
 
 CREATE TABLE songs (
-songId integer PRIMARY KEY, 
+id integer PRIMARY KEY, 
 artistId integer REFERENCES artists (id)
 imageId integer REFERENCES images (id) 
 duration integer 

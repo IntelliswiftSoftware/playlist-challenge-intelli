@@ -35,5 +35,10 @@ class Songs {
         const query = `SELECT * FROM songs orderby createDate limit to ${count}`;
         return this.db.one(query);
     }
+
+    public getPlayListSongs(playlistId) {
+        const query = `SELECT * FROM songs WHERE id in ( SELECT songId FROM playlist_songs where playlistId = ${playlistId} )`;
+        return this.db.one(query);
+    }
 }
 export default Songs;

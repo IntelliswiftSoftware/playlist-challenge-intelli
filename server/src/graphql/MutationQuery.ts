@@ -5,14 +5,14 @@ import {
 
 import QueryMaps from './QueryMaps';
 import Users from '../postgress/Users';
+
 class MutationQuery {
-    private db;
+
     private queryMaps;
     private mutationQuery;
     private users;
 
-    constructor(db, queryMaps: QueryMaps, users: Users){
-        this.db = db;
+    constructor( queryMaps: QueryMaps, users: Users){
         this.queryMaps = queryMaps;
         this.users = users;
         this.setMutationQuery();
