@@ -1,4 +1,4 @@
-import { tableNames } from '../constants/dbConstants';
+import { tableNames, mostplayedSongsCount } from '../constants/dbConstants';
 
 class Songs {
     private db;
@@ -52,6 +52,11 @@ class Songs {
         const query = `SELECT * FROM ${tableNames.ARTISTS} where id in ( select artistid from ${tableNames.SONGS} WHERE id = ${id} )`;
         return this.db.one(query);
     }
-
+    public getMostPlayedSongs() {
+        const query = `select * from songs where id in
+        ( select songid from songs_play_history GROUP BY  songid ORDER BY sum(playCount) desc limit ${mostplayedSongsCount})`;
+        return this.db.many(query);
+    }
+    
 }
 export default Songs;
