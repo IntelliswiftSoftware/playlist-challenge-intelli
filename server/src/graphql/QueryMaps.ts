@@ -21,6 +21,7 @@ class QueryMaps {
             fields: ()=>({
                 id: { type: GraphQLID },
                 firstname: { type: GraphQLString },
+                username: { type: GraphQLString },
                 lastname: { type: GraphQLString },
                 age: { type: GraphQLInt },
                 gender: { type: GraphQLString },

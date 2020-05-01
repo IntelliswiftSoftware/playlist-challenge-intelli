@@ -32,8 +32,6 @@ class PgConnector {
     private processDbResult(result) {
         return result.then(data => {
             return data;
-        }).catch(err => {
-            console.log('Error', err);
         });
     }
 

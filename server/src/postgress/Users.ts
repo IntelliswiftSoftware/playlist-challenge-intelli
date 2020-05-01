@@ -19,7 +19,18 @@ class Users {
                 success: true
             }
         }).catch(err=>{
-            console.log('Eror in error', err);
+            if ( err.message.indexOf('unique constraint "users_username_key"') ){
+                return {
+                    message: 'Could not add user, username already exists',
+                    success: false
+                }
+            } else {
+                return {
+                    message: 'Could not add user',
+                    success: false
+                }
+            }
+           
         });
     }
 
@@ -37,6 +48,11 @@ class Users {
 
     public getUserById(userId: number) {
         const query = `SELECT * FROM ${tableNames.USERS} WHERE id = ${userId}`;
+        return this.db.one(query);
+    }
+
+    public getUserByUsername(username: string) {
+        const query = `SELECT * FROM ${tableNames.USERS} WHERE username = ${username}`;
         return this.db.one(query);
     }
 
