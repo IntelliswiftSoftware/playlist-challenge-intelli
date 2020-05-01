@@ -1,4 +1,4 @@
-import { tableNames } from '../constants/dbConstants';
+import { tableNames, recentPlayedSongsCount } from '../constants/dbConstants';
 
 import UserObject from '../interfaces/UserObject';
 
@@ -58,7 +58,13 @@ class Users {
 
     public getSongsLiked(userId: number) {
         const query = `SELECT * FROM songs where id in ( select songId from songs_likes_map WHERE userId = ${userId})`;
-        return this.db.one(query);
+        return this.db.many(query);
+    }
+
+    public getRecentPlayedSongs(userId: number) {
+        const query = `SELECT * FROM songs where id in 
+        ( select songId from songs_play_history WHERE userId = ${userId}  order by lastplaydate desc limit ${recentPlayedSongsCount})`;
+        return this.db.many(query);
     }
 
     public getUserByIdPassword(username: string, password: string) {

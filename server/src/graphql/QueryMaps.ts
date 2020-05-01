@@ -33,7 +33,16 @@ class QueryMaps {
                 image: {
                     type: this.ImageType,
                     resolve: (parentValue, args) => this.objectFactory.getUsersDao().getImageByUserId(parentValue.id)
-                }
+                },
+                likedsongs: {
+                    type: new GraphQLList(this.SongType),
+                    resolve: (parentValue, args) => this.objectFactory.getUsersDao().getSongsLiked(parentValue.id)
+                },
+                recentsongs: {
+                    type: new GraphQLList(this.SongType),
+                    resolve: (parentValue, args) => this.objectFactory.getUsersDao().getRecentPlayedSongs(parentValue.id)
+                },
+                
             })
         });
  
@@ -63,6 +72,7 @@ class QueryMaps {
                 imageid: { type: GraphQLString },
                 duration: { type: GraphQLInt },
                 source: { type: GraphQLString },
+                title: { type: GraphQLString },
                 genreid: { type: GraphQLString },
                 image: {
                     type: this.ImageType,

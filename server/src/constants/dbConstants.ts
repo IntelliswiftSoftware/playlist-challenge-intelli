@@ -21,3 +21,5 @@ export const connectionObject = {
     max: 30,
     poolIdleTimeout: 10000 
 }
+
+export const recentPlayedSongsCount = 20;
