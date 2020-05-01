@@ -1,4 +1,4 @@
-import { tableNames, mostplayedSongsCount } from '../constants/dbConstants';
+import { tableNames, mostplayedSongsCount, mostLikeSongsCount } from '../constants/dbConstants';
 
 class Songs {
     private db;
@@ -6,10 +6,9 @@ class Songs {
     constructor(db) {
         this.db = db;
     }
-  
+
     public insertSong(artistId, imageId, duration, source, genreId) {
-        let id = 312;
-        const query = `INSERT INTO ${tableNames.SONGS} (id, artistId, imageId, duration, source, genreId) VALUES (${id}, '${artistId}', '${imageId}', ${duration}, '${source}', '${genreId}')`;
+        const query = `INSERT INTO ${tableNames.SONGS} (id, artistId, imageId, duration, source, genreId) VALUES ('${artistId}', '${imageId}', ${duration}, '${source}', '${genreId}')`;
         return this.db.any(query);
     }
 
@@ -57,6 +56,12 @@ class Songs {
         ( select songid from songs_play_history GROUP BY  songid ORDER BY sum(playCount) desc limit ${mostplayedSongsCount})`;
         return this.db.many(query);
     }
-    
+
+    public mostlikedSongs() {
+        const query = `SELECT * FROM songs where id 
+        in(SELECT songId FROM songs_likes_map GROUP BY  songId ORDER BY songid desc limit  ${mostLikeSongsCount} )`;
+        return this.db.many(query);
+    }
+
 }
 export default Songs;

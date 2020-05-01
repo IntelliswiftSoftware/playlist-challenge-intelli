@@ -37,6 +37,7 @@ INSERT INTO songs_moods_map (songId, moodId) VALUES (2, 2);
 
 INSERT INTO songs_likes_map (songId, userId, createDate) VALUES (1, 1, now());
 INSERT INTO songs_likes_map (songId, userId, createDate) VALUES (2, 1, now());
+INSERT INTO songs_likes_map (songId, userId, createDate) VALUES (2, 2, now());
 
 INSERT INTO songs_play_history (songId, userId, lastplayDate, playCount) VALUES (1, 1, now(), 1);
 INSERT INTO songs_play_history (songId, userId, lastplayDate, playCount) VALUES (2, 1, now(), 1);

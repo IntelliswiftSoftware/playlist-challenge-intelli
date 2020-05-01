@@ -13,7 +13,7 @@ class Artists {
         }
         return this.db.many(query);
     }
-   
+    
     public getImageByArtistId(id: number) {
         const query = `SELECT * FROM ${tableNames.IMAGES} where id in ( select imageid from ${tableNames.ARTISTS} WHERE id = ${id} )`;
         return this.db.one(query);

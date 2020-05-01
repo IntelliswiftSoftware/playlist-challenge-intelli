@@ -25,3 +25,4 @@ export const connectionObject = {
 export const recentPlayedSongsCount = 20;
 
 export const mostplayedSongsCount = 50;
+export const mostLikeSongsCount = 50;

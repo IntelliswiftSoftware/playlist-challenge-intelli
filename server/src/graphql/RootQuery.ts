@@ -46,6 +46,10 @@ class RootQuery {
                 mostPlayedsongs:{
                     type: new GraphQLList(this.queryMaps.SongType),
                     resolve: (parentValue, args) => this.objectFactory.getSongsDao().getMostPlayedSongs()
+                },
+                mostlikedSongs:{
+                    type: new GraphQLList(this.queryMaps.SongType),
+                    resolve: (parentValue, args) => this.objectFactory.getSongsDao().mostlikedSongs()
                 }
             }
         });
