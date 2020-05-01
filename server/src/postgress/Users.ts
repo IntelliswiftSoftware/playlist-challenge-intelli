@@ -1,5 +1,7 @@
 import { tableNames } from '../constants/dbConstants';
 
+import UserObject from '../interfaces/UserObject';
+
 class Users {
     private db;
 
@@ -7,14 +9,30 @@ class Users {
         this.db = db;
     }
 
-    public insertUser(args) {
-        const query = `INSERT INTO ${tableNames.USERS} (id, firstname, lastname, age, gender) VALUES (${args.id}, '${args.firstname}', '${args.lastname}', ${args.age}, '${args.gender}')`;
-        return this.db.any(query);
+    public insertUser(userObject: UserObject) {
+        const query = `INSERT INTO ${tableNames.USERS} (firstname, lastname, age, gender, password, imageId, createDate)
+        VALUES ( '${userObject.firstname}', '${userObject.lastname}', ${userObject.age}, '${userObject.gender}', 
+        '${userObject.password}', ${userObject.imageId}, now())`;
+        return this.db.any(query).then(data=>{
+            return {
+                message: 'User added successfully',
+                success: true
+            }
+        }).catch(err=>{
+            console.log('Eror in error', err);
+        });
     }
 
     public deleteUser(userId: number) {
         const query = `DELETE FROM ${tableNames.USERS} WHERE id=${userId}`;
-        return this.db.any(query);
+        return this.db.any(query).then(data => {
+            return {
+                message: 'User deleted successfully',
+                success: true
+            }
+        }).catch(err=>{
+            console.log('Eror in error', err);
+        });
     }
 
     public getUserById(userId: number) {

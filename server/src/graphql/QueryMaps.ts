@@ -11,6 +11,7 @@ class QueryMaps {
     public PlaylistType;
     private SongType;
     private objectFactory: ObjectFactory;
+    public ReturnMessageType;
 
     constructor(objectFactory: ObjectFactory){
         this.objectFactory = objectFactory;
@@ -34,8 +35,8 @@ class QueryMaps {
             fields: ()=>({
                 id: { type: GraphQLID },
                 title: { type: GraphQLString },
-                imageId: { type: GraphQLInt },
-                userId: { type: GraphQLInt },
+                imageid: { type: GraphQLInt },
+                userid: { type: GraphQLInt },
                 songs: {
                     type: new GraphQLList(this.SongType),
                     resolve: (parentValue, args) => this.objectFactory.getSongsDao().getPlayListSongs(parentValue.id)
@@ -47,11 +48,19 @@ class QueryMaps {
             name: 'Song',
             fields: ()=>({
                 id: { type: GraphQLID },
-                artistId: { type: GraphQLInt },
-                imageId: { type: GraphQLString },
+                artistid: { type: GraphQLInt },
+                imageid: { type: GraphQLString },
                 duration: { type: GraphQLInt },
                 source: { type: GraphQLString },
-                genreId: { type: GraphQLString }
+                genreid: { type: GraphQLString }
+            })
+        });
+
+        this.ReturnMessageType = new GraphQLObjectType({
+            name: 'ReturnObject',
+            fields: ()=>({
+                message: { type: GraphQLID },
+                success: { type: GraphQLBoolean }
             })
         });
 

@@ -3,19 +3,17 @@ import {
   } from 'graphql';
 
 import QueryMaps from './QueryMaps';
-import Users from '../postgress/Users';
-import Playlist from '../postgress/Playlist';
+import ObjectFactory from '../util/ObjectFactory';
+
 class RootQuery {
 
     private queryMaps;
     private rootQuery;
-    private users;
-    private playlist;
+    private objectFactory: ObjectFactory;
 
-    constructor(queryMaps: QueryMaps, users: Users, playlist: Playlist){
+    constructor(queryMaps: QueryMaps, objectFactory: ObjectFactory){
         this.queryMaps = queryMaps;
-        this.users = users;
-        this.playlist = playlist;
+        this.objectFactory = objectFactory;
         this.setRootQuery();
     }
 
@@ -30,12 +28,12 @@ class RootQuery {
                 user:{
                     type: this.queryMaps.UserType,
                     args: { id: { type: GraphQLID }},
-                    resolve:(parentValue, args) => this.users.getUserById(args.id)
+                    resolve:(parentValue, args) => this.objectFactory.getUsersDao().getUserById(args.id)
                 },
                 playlists:{
                     type: this.queryMaps.PlaylistType,
                     args: { id: { type: GraphQLID }},
-                    resolve: (parentValue, args) => this.playlist.getPlaylistByPlaylistid(args.id)
+                    resolve: (parentValue, args) => this.objectFactory.getPlayListsDao().getPlaylistByPlaylistid(args.id)
                 }
             }
         });
