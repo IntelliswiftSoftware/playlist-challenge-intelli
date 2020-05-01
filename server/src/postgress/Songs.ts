@@ -42,5 +42,16 @@ class Songs {
         const query = `SELECT * FROM ${tableNames.SONGS} WHERE id in ( SELECT songId FROM playlist_songs where playlistId = ${playlistId} )`;
         return this.db.many(query);
     }
+
+    public getImageBySongId(id: number) {
+        const query = `SELECT * FROM ${tableNames.IMAGES} where id in ( select imageid from ${tableNames.SONGS} WHERE id = ${id} )`;
+        return this.db.one(query);
+    }
+
+    public getSongArtist(id: number) {
+        const query = `SELECT * FROM ${tableNames.ARTISTS} where id in ( select artistid from ${tableNames.SONGS} WHERE id = ${id} )`;
+        return this.db.one(query);
+    }
+
 }
 export default Songs;

@@ -4,6 +4,7 @@ import Users from '../postgress/Users';
 import Playlist from '../postgress/Playlist';
 import Songs from '../postgress/Songs';
 import Images from '../postgress/Images';
+import Artists from '../postgress/Artists';
 
 class ObjectFactory {
 
@@ -12,7 +13,7 @@ class ObjectFactory {
     private PlaylistDao : Playlist;
     private SongsDao : Songs;
     private ImagesDao : Images;
-    
+    private ArtistsDao: Artists;
 
     constructor(){
         this.db = new DbConnector();
@@ -46,6 +47,13 @@ class ObjectFactory {
             this.ImagesDao = new Images(this.db);
         }
         return this.ImagesDao;
+    }
+
+    getArtistsDao(){
+        if ( !this.ArtistsDao ) {
+            this.ArtistsDao = new Artists(this.db);
+        }
+        return this.ArtistsDao;
     }
 }
 

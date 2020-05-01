@@ -37,6 +37,11 @@ class RootQuery {
                     type: new GraphQLList(this.queryMaps.ImageType),
                     args: { id: { type: GraphQLID }},
                     resolve: (parentValue, args) => this.objectFactory.getImagesDao().getImages(args.id)
+                },
+                artists:{
+                    type: new GraphQLList(this.queryMaps.ArtistType),
+                    args: { id: { type: GraphQLID }},
+                    resolve: (parentValue, args) => this.objectFactory.getArtistsDao().getArtists(args.id)
                 }
             }
         });
