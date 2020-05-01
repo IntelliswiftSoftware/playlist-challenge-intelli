@@ -5,12 +5,14 @@ import Playlist from '../postgress/Playlist';
 import Songs from '../postgress/Songs';
 import Images from '../postgress/Images';
 import Artists from '../postgress/Artists';
+import PlaylistSongs from '../postgress/PlaylistSongs';
 
 class ObjectFactory {
 
     private db : DbConnector;
     private usersDao : Users;
     private PlaylistDao : Playlist;
+    private PlaylistSongsDao : PlaylistSongs;
     private SongsDao : Songs;
     private ImagesDao : Images;
     private ArtistsDao: Artists;
@@ -34,6 +36,12 @@ class ObjectFactory {
             this.PlaylistDao = new Playlist(this.db);
         }
         return this.PlaylistDao;
+    }
+    getPlaylistSongsDao(){
+        if ( !this.PlaylistSongsDao ) {
+            this.PlaylistSongsDao = new PlaylistSongs(this.db);
+        }
+        return this.PlaylistSongsDao;
     }
     getSongsDao(){
         if ( !this.SongsDao ) {

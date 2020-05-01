@@ -31,7 +31,7 @@ class UserMutations {
                     imageId: 1
                 }
                 return this.objectFactory.getUsersDao().insertUser(newUser);
-            } 
+            }
         }
     }
 

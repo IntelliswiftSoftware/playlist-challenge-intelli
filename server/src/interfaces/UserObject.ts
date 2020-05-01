@@ -1,6 +1,6 @@
 interface UserObject {
     username:string,
-    firstname:string, 
+    firstname:string,
     lastname:string,
     password:string,
     age:number,

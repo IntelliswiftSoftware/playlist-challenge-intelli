@@ -1,9 +1,23 @@
 import { tableNames } from '../constants/dbConstants';
+import PlaylistObject from '../interfaces/PlaylistObject';
 
 class Playlist {
     private db;
     constructor(db) {
         this.db = db;
+    }
+
+    public insertPlaylist(playlistObject: PlaylistObject) {
+        const query = `INSERT INTO ${tableNames.PLAYLIST} (title, userId, imageId, createDate, modifiedDate)
+        VALUES ( '${playlistObject.title}', '${playlistObject.userId}', ${playlistObject.imageId}, now(), now())`;
+        return this.db.any(query).then(data=>{
+            return {
+                message: 'Playlist added successfully',
+                success: true
+            }
+        }).catch(err=>{
+            console.log('Eror in error', err);
+        });
     }
 
     public getPlaylistByUserId(id:number) {
@@ -15,11 +29,6 @@ class Playlist {
         return this.db.one(query);
     }
 
-    public insertPlaylist(title:string, userId:number) {
-        const createDate = new Date();
-        const query = `INSERT INTO ${tableNames.PLAYLIST} (title, userId, createDate) VALUES ('${title}', '${userId}', ${createDate})`;
-        return this.db.any(query);
-    }
     public insertSongToPlaylist(playListId:number, songId:number) {
         const id = 23;
         const query = `INSERT INTO ${tableNames.PLAYLIST_SONGS} (id, songId, playlistId) VALUES (${id}, '${songId}', '${playListId}')`;
