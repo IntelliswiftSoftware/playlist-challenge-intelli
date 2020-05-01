@@ -29,13 +29,13 @@ class App {
     })
 
     this.app.post('/login',(req, res) => {
-      const username = parseInt(req.body.username);
+      const username = req.body.username;
       const password =  req.body.password;
 
       res.setHeader('Content-Type','application/json');
 
       this.objectFactory.getUsersDao().getUserByIdPassword(username, password).then(data => {
-         if ( data && typeof data === 'object' && data.id === req.body.username ) {
+         if ( data && typeof data === 'object' && data.username === req.body.username ) {
             delete data.createdate;
             res.end(JSON.stringify(data));
          } else {

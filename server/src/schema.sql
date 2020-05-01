@@ -13,6 +13,7 @@ high varchar(1000) NOT NULL
 
 CREATE TABLE users (
 id serial PRIMARY KEY, 
+username varchar(40) NOT NULL UNIQUE,
 firstname varchar(40) NOT NULL, 
 lastname varchar(40) NOT NULL,
 password varchar(100) NOT NULL, 

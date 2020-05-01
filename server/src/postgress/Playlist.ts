@@ -25,6 +25,10 @@ class Playlist {
         const query = `INSERT INTO ${tableNames.PLAYLIST_SONGS} (id, songId, playlistId) VALUES (${id}, '${songId}', '${playListId}')`;
         return this.db.one(query);
     }
+    public getImageByPlaylistId(id: number) {
+        const query = `SELECT * FROM ${tableNames.IMAGES} where id in ( select imageid from ${tableNames.PLAYLIST} WHERE id = ${id} )`;
+        return this.db.one(query);
+    }
 
 }
 

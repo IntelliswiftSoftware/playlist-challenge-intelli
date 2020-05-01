@@ -12,6 +12,7 @@ class QueryMaps {
     private SongType;
     private objectFactory: ObjectFactory;
     public ReturnMessageType;
+    public ImageType;
 
     constructor(objectFactory: ObjectFactory){
         this.objectFactory = objectFactory;
@@ -26,6 +27,10 @@ class QueryMaps {
                 playlists: {
                     type: new GraphQLList(this.PlaylistType),
                     resolve: (parentValue, args) => this.objectFactory.getPlayListsDao().getPlaylistByUserId(parentValue.id)
+                },
+                image: {
+                    type: this.ImageType,
+                    resolve: (parentValue, args) => this.objectFactory.getUsersDao().getImageByUserId(parentValue.id)
                 }
             })
         });
@@ -40,6 +45,10 @@ class QueryMaps {
                 songs: {
                     type: new GraphQLList(this.SongType),
                     resolve: (parentValue, args) => this.objectFactory.getSongsDao().getPlayListSongs(parentValue.id)
+                },
+                image: {
+                    type: this.ImageType,
+                    resolve: (parentValue, args) => this.objectFactory.getPlayListsDao().getImageByPlaylistId(parentValue.id)
                 }
             })
         })
@@ -61,6 +70,16 @@ class QueryMaps {
             fields: ()=>({
                 message: { type: GraphQLID },
                 success: { type: GraphQLBoolean }
+            })
+        });
+
+        this.ImageType = new GraphQLObjectType({
+            name: 'Image',
+            fields: ()=>({
+                id: { type: GraphQLID },
+                low: { type: GraphQLString },
+                mid: { type: GraphQLString },
+                high: { type: GraphQLString }
             })
         });
 

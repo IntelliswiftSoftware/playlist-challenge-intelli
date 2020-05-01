@@ -10,8 +10,8 @@ class Users {
     }
 
     public insertUser(userObject: UserObject) {
-        const query = `INSERT INTO ${tableNames.USERS} (firstname, lastname, age, gender, password, imageId, createDate)
-        VALUES ( '${userObject.firstname}', '${userObject.lastname}', ${userObject.age}, '${userObject.gender}', 
+        const query = `INSERT INTO ${tableNames.USERS} (username, firstname, lastname, age, gender, password, imageId, createDate)
+        VALUES ( '${userObject.username}','${userObject.firstname}', '${userObject.lastname}', ${userObject.age}, '${userObject.gender}', 
         '${userObject.password}', ${userObject.imageId}, now())`;
         return this.db.any(query).then(data=>{
             return {
@@ -45,8 +45,13 @@ class Users {
         return this.db.one(query);
     }
 
-    public getUserByIdPassword(userId: number, password: string) {
-        const query = `SELECT * FROM ${tableNames.USERS} WHERE id = ${userId} and password ='${password}'`;
+    public getUserByIdPassword(username: string, password: string) {
+        const query = `SELECT * FROM ${tableNames.USERS} WHERE username = '${username}' and password ='${password}'`;
+        return this.db.one(query);
+    }
+
+    public getImageByUserId(userId: number) {
+        const query = `SELECT * FROM ${tableNames.IMAGES} where id in ( select imageid from ${tableNames.USERS} WHERE id = ${userId} )`;
         return this.db.one(query);
     }
 }

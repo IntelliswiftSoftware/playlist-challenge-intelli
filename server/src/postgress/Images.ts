@@ -7,8 +7,8 @@ class Images {
         this.db = db;
     }
   
-    public insertImage(id, low, mid, high) {
-        const query = `INSERT INTO ${tableNames.IMAGES} (id, low, mid, high) VALUES (${id}, '${low}', '${mid}', ${high})`;
+    public insertImage(low, mid, high) {
+        const query = `INSERT INTO ${tableNames.IMAGES} (low, mid, high) VALUES ('${low}', '${mid}', ${high})`;
         return this.db.any(query);
     }
 
@@ -17,9 +17,12 @@ class Images {
         return this.db.any(query);
     }
 
-    public getImageById(imageId) {
-        const query = `SELECT * FROM ${tableNames.IMAGES} WHERE id = ${imageId}`;
-        return this.db.one(query);
+    public getImages(imageId) {
+        let query = `SELECT * FROM ${tableNames.IMAGES}`;
+        if ( imageId ){
+            query = `SELECT * FROM ${tableNames.IMAGES} WHERE id = ${imageId}`;
+        }
+        return this.db.many(query);
     }
 }
 export default Images;

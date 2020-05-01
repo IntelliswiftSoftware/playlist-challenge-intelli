@@ -18,6 +18,7 @@ class UserMutations {
         return {
             type:  this.queryMaps.ReturnMessageType,
             args: {
+                username: { type: new GraphQLNonNull( GraphQLString )},
                 firstname: { type: new GraphQLNonNull( GraphQLString )},
                 lastname: { type: new GraphQLNonNull( GraphQLString )},
                 age: { type: GraphQLInt },

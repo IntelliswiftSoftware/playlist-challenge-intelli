@@ -1,4 +1,5 @@
-interface UserObject { 
+interface UserObject {
+    username:string,
     firstname:string, 
     lastname:string,
     password:string,

@@ -1,6 +1,4 @@
-import {
-    GraphQLObjectType, GraphQLID
-  } from 'graphql';
+import { GraphQLObjectType, GraphQLID, GraphQLList } from 'graphql';
 
 import QueryMaps from './QueryMaps';
 import ObjectFactory from '../util/ObjectFactory';
@@ -34,6 +32,11 @@ class RootQuery {
                     type: this.queryMaps.PlaylistType,
                     args: { id: { type: GraphQLID }},
                     resolve: (parentValue, args) => this.objectFactory.getPlayListsDao().getPlaylistByPlaylistid(args.id)
+                },
+                images:{
+                    type: new GraphQLList(this.queryMaps.ImageType),
+                    args: { id: { type: GraphQLID }},
+                    resolve: (parentValue, args) => this.objectFactory.getImagesDao().getImages(args.id)
                 }
             }
         });
