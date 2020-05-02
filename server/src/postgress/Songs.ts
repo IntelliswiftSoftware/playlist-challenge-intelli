@@ -1,4 +1,4 @@
-import { tableNames, mostplayedSongsCount, mostLikeSongsCount } from '../constants/dbConstants';
+import { tableNames, mostplayedSongsCount, mostLikeSongsCount, newReleaseSongsCount } from '../constants/dbConstants';
 
 class Songs {
     private db;
@@ -23,7 +23,9 @@ class Songs {
     }
 
     public getSongByMood(moodId) {
-        const query = `SELECT * FROM ${tableNames.SONGS} WHERE id in ( SELECT songId FROM songs_moods_map where moodId = ${moodId} )`;
+        const query = `SELECT s.*, smm.moodid FROM songs as s
+        left join songs_moods_map as smm on (s.id = smm.songid)
+        WHERE smm.moodid = ${moodId};`;
         return this.db.many(query);
     }
 
@@ -32,8 +34,8 @@ class Songs {
         return this.db.many(query);
     }
 
-    public getNewSongs(count) {
-        const query = `SELECT * FROM ${tableNames.SONGS} orderby createDate limit to ${count}`;
+    public getNewReleaseSongs() {
+        const query = `SELECT * FROM ${tableNames.SONGS} ORDER BY createdate desc limit ${newReleaseSongsCount}`;
         return this.db.many(query);
     }
 
@@ -57,9 +59,9 @@ class Songs {
         return this.db.many(query);
     }
 
-    public mostlikedSongs() {
+    public getmostlikedSongs() {
         const query = `SELECT * FROM songs where id 
-        in(SELECT songId FROM songs_likes_map GROUP BY  songId ORDER BY songid desc limit  ${mostLikeSongsCount} )`;
+        in(SELECT songId FROM songs_likes_map GROUP BY songId ORDER BY songid desc limit  ${mostLikeSongsCount} )`;
         return this.db.many(query);
     }
 

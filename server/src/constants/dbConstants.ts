@@ -26,3 +26,4 @@ export const recentPlayedSongsCount = 20;
 
 export const mostplayedSongsCount = 50;
 export const mostLikeSongsCount = 50;
+export const newReleaseSongsCount = 60;

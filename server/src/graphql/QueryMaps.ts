@@ -14,6 +14,7 @@ class QueryMaps {
     public ReturnMessageType;
     public ImageType;
     public ArtistType;
+    public SongCategories;
 
     constructor(objectFactory: ObjectFactory){
         this.objectFactory = objectFactory;
@@ -100,6 +101,17 @@ class QueryMaps {
                 low: { type: GraphQLString },
                 mid: { type: GraphQLString },
                 high: { type: GraphQLString }
+            })
+        });
+
+        this.SongCategories = new GraphQLObjectType({
+            name: 'SongCategories',
+            fields: ()=>({
+                id: { type: GraphQLID },
+                name: { type: GraphQLString },
+                description: { type: GraphQLString },
+                imageid: { type: GraphQLID },
+                ismood: { type: GraphQLBoolean }
             })
         });
 

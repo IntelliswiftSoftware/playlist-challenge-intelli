@@ -49,8 +49,30 @@ class RootQuery {
                 },
                 mostlikedSongs:{
                     type: new GraphQLList(this.queryMaps.SongType),
-                    resolve: (parentValue, args) => this.objectFactory.getSongsDao().mostlikedSongs()
-                }
+                    resolve: (parentValue, args) => this.objectFactory.getSongsDao().getmostlikedSongs()
+                },
+                newReleaseSongs:{
+                    type: new GraphQLList(this.queryMaps.SongType),
+                    resolve: (parentValue, args) => this.objectFactory.getSongsDao().getNewReleaseSongs()
+                },
+                songByMood:{
+                    type: new GraphQLList(this.queryMaps.SongType),
+                    args: { id: { type: GraphQLID }},
+                    resolve: (parentValue, args) => this.objectFactory.getSongsDao().getSongByMood(args.id)
+                },
+                allmoods:{
+                    type: new GraphQLList(this.queryMaps.SongCategories),
+                    resolve: (parentValue, args) => this.objectFactory.getSongCategoriesDao().getAllmoods()
+                },
+                songsByGenre:{
+                    type: new GraphQLList(this.queryMaps.SongType),
+                    args: { genreId: { type: GraphQLID }},
+                    resolve: (parentValue, args) => this.objectFactory.getSongsDao().getSongByGenre(args.genreId)
+                },
+                allGenres:{
+                    type: new GraphQLList(this.queryMaps.SongCategories),
+                    resolve: (parentValue, args) => this.objectFactory.getSongCategoriesDao().getAllGenres()
+                },
             }
         });
     }

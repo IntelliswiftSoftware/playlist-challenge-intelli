@@ -6,6 +6,7 @@ import Songs from '../postgress/Songs';
 import Images from '../postgress/Images';
 import Artists from '../postgress/Artists';
 import PlaylistSongs from '../postgress/PlaylistSongs';
+import SongCategories from '../postgress/SongCategories';
 
 class ObjectFactory {
 
@@ -16,6 +17,8 @@ class ObjectFactory {
     private SongsDao : Songs;
     private ImagesDao : Images;
     private ArtistsDao: Artists;
+    private SongCategoriesDao: SongCategories;
+
 
     constructor(){
         this.db = new DbConnector();
@@ -62,6 +65,13 @@ class ObjectFactory {
             this.ArtistsDao = new Artists(this.db);
         }
         return this.ArtistsDao;
+    }
+
+    getSongCategoriesDao(){
+        if ( !this.SongCategoriesDao ) {
+            this.SongCategoriesDao = new SongCategories(this.db);
+        }
+        return this.SongCategoriesDao;
     }
 }
 
