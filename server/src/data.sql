@@ -52,6 +52,8 @@ INSERT INTO songs_moods_map (songId, moodId) VALUES (1, 2);
 INSERT INTO songs_moods_map (songId, moodId) VALUES (1, 3);
 INSERT INTO songs_moods_map (songId, moodId) VALUES (2, 3);
 INSERT INTO songs_moods_map (songId, moodId) VALUES (2, 2);
+INSERT INTO songs_moods_map (songId, moodId) VALUES (4, 2);
+INSERT INTO songs_moods_map (songId, moodId) VALUES (5, 2);
 
 INSERT INTO songs_likes_map (songId, userId, createDate) VALUES (1, 1, now());
 INSERT INTO songs_likes_map (songId, userId, createDate) VALUES (2, 1, now());

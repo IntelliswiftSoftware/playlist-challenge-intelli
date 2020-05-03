@@ -80,7 +80,7 @@ class RootQuery {
                 songsByGenre:{
                     type: new GraphQLList(this.queryMaps.SongType),
                     args: { 
-                        id: { type: GraphQLID },
+                        genreId: { type: GraphQLID },
                         userId: { type: GraphQLInt }
                     },
                     resolve: (parentValue, args) => this.objectFactory.getSongsDao().getSongByGenre(args.userId, args.genreId)

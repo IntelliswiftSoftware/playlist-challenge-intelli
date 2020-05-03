@@ -39,11 +39,17 @@ class PgConnector {
     }
 
     public many(query, options) {
-        let limit = paginationConfig.pageNumber * paginationConfig.pageSize;
-        if (options && options.pagination && options.pageNumber > 0 && options.pageSize > 0) {
-            limit = options.pageSize * options.pageNumber;
+       
+        if ( options && options.pagination ){
+            // apply default limit 
+            let limit = paginationConfig.pageNumber * paginationConfig.pageSize;
+
+            if ( options.pageNumber > 0 && options.pageSize > 0) {
+                limit = options.pageSize * options.pageNumber;
+            }
+            query+= ` limit ${limit}`;
         }
-        query+= ` limit ${limit}`;
+
         return this.processDbResult(this.conn.many(query), options);
     }
 

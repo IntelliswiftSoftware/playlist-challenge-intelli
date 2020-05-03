@@ -43,8 +43,13 @@ class App {
             res.end( JSON.stringify({ message: 'Invalid Username and password' }))
          }
        }).catch( err => {
+         if ( err.message === 'No data returned from the query.') {
+          res.statusCode = 401;
+          res.end( JSON.stringify({ message: 'Invalid Username and password' }))
+         } else {
           res.statusCode = 503;
           res.end( JSON.stringify({ message: 'Internal server error'}))
+         }
        });
       })
   }
