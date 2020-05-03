@@ -18,14 +18,27 @@ class PaylistSongMutations {
         return {
             type:  this.queryMaps.ReturnMessageType,
             args: {
-                songId: { type: new GraphQLNonNull( GraphQLInt )},
-                playlistId: { type: new GraphQLNonNull( GraphQLInt )}
+                songId: { type: new GraphQLNonNull( GraphQLString )},
+                playlistId: { type: new GraphQLNonNull( GraphQLString )}
             },
             resolve: (parentValue, args)  => {
-                const newPlaylistSong: PlaylistSongsObject = {
-                    ...args
+                const arrnewPlaylistSong = [];
+                const songIds = args.songId.split(',');
+                const playlistIds = args.playlistId.split(',');
+
+                for(let i=0; i<songIds.length; i++){
+                    for(const j=i; j<playlistIds.length;){
+                        const songId = parseInt(songIds[i], 10);
+                        const playlistId = parseInt(playlistIds[j], 10);
+                        const newPlaylistSong: PlaylistSongsObject = {
+                            songId,
+                            playlistId
+                        }
+                        arrnewPlaylistSong.push(newPlaylistSong);
+                        break
+                    }
                 }
-                return this.objectFactory.getPlaylistSongsDao().insertPlaylistSongs(newPlaylistSong);
+                return this.objectFactory.getPlaylistSongsDao().insertPlaylistSongs(arrnewPlaylistSong);
             }
         }
     }
@@ -34,8 +47,8 @@ class PaylistSongMutations {
         return {
             type: this.queryMaps.ReturnMessageType,
             args: {
-                songId: { type: new GraphQLNonNull( GraphQLInt )},
-                playlistId: { type: new GraphQLNonNull( GraphQLInt )}
+                songId: { type: new GraphQLNonNull( GraphQLString )},
+                playlistId: { type: new GraphQLNonNull( GraphQLString )}
             },
             resolve: (parentValue, args) => this.objectFactory.getPlaylistSongsDao().deletePlaylistSong(args.songId, args.playlistId)
         }
