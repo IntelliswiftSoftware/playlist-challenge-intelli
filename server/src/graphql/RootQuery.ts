@@ -1,4 +1,4 @@
-import { GraphQLObjectType, GraphQLID, GraphQLList } from 'graphql';
+import { GraphQLObjectType, GraphQLID, GraphQLList, GraphQLInt } from 'graphql';
 
 import QueryMaps from './QueryMaps';
 import ObjectFactory from '../util/ObjectFactory';
@@ -30,7 +30,10 @@ class RootQuery {
                 },
                 playlists:{
                     type: this.queryMaps.PlaylistType,
-                    args: { id: { type: GraphQLID }},
+                    args: { 
+                        id: { type: GraphQLID },
+                        userId: { type: GraphQLInt }
+                    },
                     resolve: (parentValue, args) => this.objectFactory.getPlayListsDao().getPlaylistByPlaylistid(args.id)
                 },
                 images:{
@@ -45,20 +48,30 @@ class RootQuery {
                 },
                 mostPlayedsongs:{
                     type: new GraphQLList(this.queryMaps.SongType),
-                    resolve: (parentValue, args) => this.objectFactory.getSongsDao().getMostPlayedSongs()
+                    args: { userId: { type: GraphQLInt }},
+                    resolve: (parentValue, args) => this.objectFactory.getSongsDao().getMostPlayedSongs(args.userId)
                 },
                 mostlikedSongs:{
                     type: new GraphQLList(this.queryMaps.SongType),
-                    resolve: (parentValue, args) => this.objectFactory.getSongsDao().getmostlikedSongs()
+                    args: { userId: { type: GraphQLInt }},
+                    resolve: (parentValue, args) => this.objectFactory.getSongsDao().getmostlikedSongs(args.userId)
                 },
                 newReleaseSongs:{
                     type: new GraphQLList(this.queryMaps.SongType),
-                    resolve: (parentValue, args) => this.objectFactory.getSongsDao().getNewReleaseSongs()
+                    args: {
+                        pageNumber: { type: GraphQLInt },
+                        pageSize: { type: GraphQLInt },
+                        userId: { type: GraphQLInt }
+                    },
+                    resolve: (parentValue, args) => this.objectFactory.getSongsDao().getNewReleaseSongs(args.pageSize, args.pageNumber,args.userId)
                 },
                 songByMood:{
                     type: new GraphQLList(this.queryMaps.SongType),
-                    args: { id: { type: GraphQLID }},
-                    resolve: (parentValue, args) => this.objectFactory.getSongsDao().getSongByMood(args.id)
+                    args: { 
+                        id: { type: GraphQLID },
+                        userId: { type: GraphQLInt }
+                    },
+                    resolve: (parentValue, args) => this.objectFactory.getSongsDao().getSongByMood(args.userId, args.id)
                 },
                 allmoods:{
                     type: new GraphQLList(this.queryMaps.SongCategories),
@@ -66,13 +79,20 @@ class RootQuery {
                 },
                 songsByGenre:{
                     type: new GraphQLList(this.queryMaps.SongType),
-                    args: { genreId: { type: GraphQLID }},
-                    resolve: (parentValue, args) => this.objectFactory.getSongsDao().getSongByGenre(args.genreId)
+                    args: { 
+                        id: { type: GraphQLID },
+                        userId: { type: GraphQLInt }
+                    },
+                    resolve: (parentValue, args) => this.objectFactory.getSongsDao().getSongByGenre(args.userId, args.genreId)
                 },
                 allGenres:{
                     type: new GraphQLList(this.queryMaps.SongCategories),
                     resolve: (parentValue, args) => this.objectFactory.getSongCategoriesDao().getAllGenres()
                 },
+                newReleaseSongsCount:{
+                    type: this.queryMaps.CountType,
+                    resolve: (parentValue, args) => this.objectFactory.getSongsDao().getNewReleaseSongsCount()
+                }
             }
         });
     }

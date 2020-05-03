@@ -56,17 +56,6 @@ class Users {
         return this.db.one(query);
     }
 
-    public getSongsLiked(userId: number) {
-        const query = `SELECT * FROM songs where id in ( select songId from songs_likes_map WHERE userId = ${userId})`;
-        return this.db.many(query);
-    }
-
-    public getRecentPlayedSongs(userId: number) {
-        const query = `SELECT * FROM songs where id in 
-        ( select songId from songs_play_history WHERE userId = ${userId}  order by lastplaydate desc limit ${recentPlayedSongsCount})`;
-        return this.db.many(query);
-    }
-
     public getUserByIdPassword(username: string, password: string) {
         const query = `SELECT * FROM ${tableNames.USERS} WHERE username = '${username}' and password ='${password}'`;
         return this.db.one(query);

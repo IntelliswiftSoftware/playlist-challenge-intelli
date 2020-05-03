@@ -22,6 +22,24 @@ VALUES ('tere nam', 1, 1, 50, 'https://pwdown.com/113457/variation/190K/Bezubaan
 INSERT INTO songs (title, artistId, imageId, duration, source, genreId, createDate) 
 VALUES ('mere nam', 1, 1, 50, 'https://pwdown.com/113457/variation/190K/Bezubaan%20Kab%20Se%20-%20Street%20Dancer%203D.mp3', 1, now());
 
+INSERT INTO songs (title, artistId, imageId, duration, source, genreId, createDate, createdBy) 
+VALUES ('Tu jane na', 1, 1, 50, 'https://pwdown.com/113457/variation/190K/Bezubaan%20Kab%20Se%20-%20Street%20Dancer%203D.mp3', 1, now(), 1);
+
+INSERT INTO songs (title, artistId, imageId, duration, source, genreId, createDate) 
+VALUES ('Julwa', 1, 1, 50, 'https://pwdown.com/113457/variation/190K/Bezubaan%20Kab%20Se%20-%20Street%20Dancer%203D.mp3', 1, now());
+
+INSERT INTO songs (title, artistId, imageId, duration, source, genreId, createDate, createdBy) 
+VALUES ('nazar ke samne', 1, 1, 50, 'https://pwdown.com/113457/variation/190K/Bezubaan%20Kab%20Se%20-%20Street%20Dancer%203D.mp3', 1, now(), 1);
+
+INSERT INTO songs (title, artistId, imageId, duration, source, genreId, createDate) 
+VALUES ('Ghar se nikalte hi', 1, 1, 50, 'https://pwdown.com/113457/variation/190K/Bezubaan%20Kab%20Se%20-%20Street%20Dancer%203D.mp3', 1, now());
+
+INSERT INTO songs (title, artistId, imageId, duration, source, genreId, createDate, createdBy) 
+VALUES ('Dil diya hai', 1, 1, 50, 'https://pwdown.com/113457/variation/190K/Bezubaan%20Kab%20Se%20-%20Street%20Dancer%203D.mp3', 1, now(), 1);
+
+INSERT INTO songs (title, artistId, imageId, duration, source, genreId, createDate) 
+VALUES ('Teri ore', 1, 1, 50, 'https://pwdown.com/113457/variation/190K/Bezubaan%20Kab%20Se%20-%20Street%20Dancer%203D.mp3', 1, now());
+
 INSERT INTO album (title, imageId, createDate) VALUES ('Sonu bhau che gane', 1, now());
 
 INSERT INTO album_songs (songId, albumId, playOrder) VALUES (1, 1, 1);
@@ -43,3 +61,5 @@ INSERT INTO songs_play_history (songId, userId, lastplayDate, playCount) VALUES 
 INSERT INTO songs_play_history (songId, userId, lastplayDate, playCount) VALUES (2, 1, now(), 1);
 INSERT INTO songs_play_history (songId, userId, lastplayDate, playCount) VALUES (1, 2, now(), 1);
 INSERT INTO songs_play_history (songId, userId, lastplayDate, playCount) VALUES (2, 2, now(), 1);
+INSERT INTO songs_play_history (songId, userId, lastplayDate, playCount) VALUES (5, 1, now(), 1);
+INSERT INTO songs_play_history (songId, userId, lastplayDate, playCount) VALUES (4, 1, now(), 1);

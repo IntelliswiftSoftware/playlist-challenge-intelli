@@ -1,5 +1,5 @@
 import pgPromise from 'pg-promise';
-import { connectionObject } from '../constants/dbConstants';
+import { connectionObject, paginationConfig } from '../constants/dbConstants';
 
 class PgConnector {
     public conn;
@@ -29,22 +29,30 @@ class PgConnector {
         });
     }
 
-    private processDbResult(result) {
+    private processDbResult(result, options) {
         return result.then(data => {
+            if (options && options.pagination && options.pageNumber > 0 && options.pageSize > 0) {
+                data = data.slice((options.pageNumber-1)*options.pageSize, options.pageNumber*options.pageSize);
+            }
             return data;
         });
     }
 
-    public many(query) {
-        return this.processDbResult(this.conn.many(query));
+    public many(query, options) {
+        let limit = paginationConfig.pageNumber * paginationConfig.pageSize;
+        if (options && options.pagination && options.pageNumber > 0 && options.pageSize > 0) {
+            limit = options.pageSize * options.pageNumber;
+        }
+        query+= ` limit ${limit}`;
+        return this.processDbResult(this.conn.many(query), options);
     }
 
     public any(query) {
-        return this.processDbResult(this.conn.any(query));
+        return this.processDbResult(this.conn.any(query), null);
     }
 
     public one(query) {
-        return this.processDbResult(this.conn.one(query));
+        return this.processDbResult(this.conn.one(query), null);
     }
 }
 

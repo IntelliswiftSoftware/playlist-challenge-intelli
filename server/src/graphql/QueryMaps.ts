@@ -15,6 +15,7 @@ class QueryMaps {
     public ImageType;
     public ArtistType;
     public SongCategories;
+    public CountType;
 
     constructor(objectFactory: ObjectFactory){
         this.objectFactory = objectFactory;
@@ -37,11 +38,11 @@ class QueryMaps {
                 },
                 likedsongs: {
                     type: new GraphQLList(this.SongType),
-                    resolve: (parentValue, args) => this.objectFactory.getUsersDao().getSongsLiked(parentValue.id)
+                    resolve: (parentValue, args) => this.objectFactory.getSongsDao().getSongsLiked(parentValue.id)
                 },
                 recentsongs: {
                     type: new GraphQLList(this.SongType),
-                    resolve: (parentValue, args) => this.objectFactory.getUsersDao().getRecentPlayedSongs(parentValue.id)
+                    resolve: (parentValue, args) => this.objectFactory.getSongsDao().getRecentPlayedSongs(parentValue.id)
                 },
                 
             })
@@ -56,7 +57,9 @@ class QueryMaps {
                 userid: { type: GraphQLInt },
                 songs: {
                     type: new GraphQLList(this.SongType),
-                    resolve: (parentValue, args) => this.objectFactory.getSongsDao().getPlayListSongs(parentValue.id)
+                    resolve: (parentValue, args) => {    
+                        return this.objectFactory.getSongsDao().getPlayListSongs( parentValue.userid, parentValue.id);
+                    } 
                 },
                 image: {
                     type: this.ImageType,
@@ -75,6 +78,7 @@ class QueryMaps {
                 source: { type: GraphQLString },
                 title: { type: GraphQLString },
                 genreid: { type: GraphQLString },
+                isLiked: { type: GraphQLBoolean },
                 image: {
                     type: this.ImageType,
                     resolve: (parentValue, args) => this.objectFactory.getSongsDao().getImageBySongId(parentValue.id)
@@ -110,8 +114,10 @@ class QueryMaps {
                 id: { type: GraphQLID },
                 name: { type: GraphQLString },
                 description: { type: GraphQLString },
-                imageid: { type: GraphQLID },
-                ismood: { type: GraphQLBoolean }
+                image: {
+                    type: this.ImageType,
+                    resolve: (parentValue, args) => this.objectFactory.getSongsDao().getImageByCategoryId(parentValue.id)
+                },
             })
         });
 
@@ -131,6 +137,12 @@ class QueryMaps {
             })
         });
 
+        this.CountType = new GraphQLObjectType({
+            name: 'CountType',
+            fields: ()=>({
+                count: { type: GraphQLInt }
+            })
+        });
     }
 }
 

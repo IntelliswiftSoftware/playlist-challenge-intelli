@@ -12,7 +12,7 @@ class SongCategories {
     }
 
     public getAllGenres() {
-        const query = `SELECT * FROM ${tableNames.SONG_CATEGORIES}`;
+        const query = `SELECT * FROM ${tableNames.SONG_CATEGORIES}  WHERE ismood = false`;
         return this.db.many(query);
     }
 }

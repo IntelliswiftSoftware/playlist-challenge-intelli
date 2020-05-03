@@ -17,13 +17,16 @@ export const connectionObject = {
     port: 5432,
     database: 'song_playlist',
     user: 'postgres',
-    password: 'root',
+    password: 'codemaster',
     max: 30,
     poolIdleTimeout: 10000 
 }
 
 export const recentPlayedSongsCount = 20;
-
 export const mostplayedSongsCount = 50;
 export const mostLikeSongsCount = 50;
-export const newReleaseSongsCount = 60;
+
+export const paginationConfig = {
+    pageSize: 10,
+    pageNumber: 1
+}
