@@ -22,7 +22,7 @@ class PaylistSongMutations {
                 playlistId: { type: new GraphQLNonNull( GraphQLString )}
             },
             resolve: (parentValue, args)  => {
-                const arrnewPlaylistSong = [];
+                const newPlaylistSongs = [];
                 const songIds = args.songId.split(',');
                 const playlistIds = args.playlistId.split(',');
 
@@ -34,11 +34,11 @@ class PaylistSongMutations {
                             songId,
                             playlistId
                         }
-                        arrnewPlaylistSong.push(newPlaylistSong);
+                        newPlaylistSongs.push(newPlaylistSong);
                         break
                     }
                 }
-                return this.objectFactory.getPlaylistSongsDao().insertPlaylistSongs(arrnewPlaylistSong);
+                return this.objectFactory.getPlaylistSongsDao().insertPlaylistSongs(newPlaylistSongs);
             }
         }
     }
