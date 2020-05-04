@@ -1,4 +1,4 @@
-import { GraphQLObjectType, GraphQLID, GraphQLList, GraphQLInt } from 'graphql';
+import { GraphQLObjectType, GraphQLID, GraphQLList, GraphQLInt, GraphQLString } from 'graphql';
 
 import QueryMaps from './QueryMaps';
 import ObjectFactory from '../util/ObjectFactory';
@@ -92,7 +92,15 @@ class RootQuery {
                 newReleaseSongsCount:{
                     type: this.queryMaps.CountType,
                     resolve: (parentValue, args) => this.objectFactory.getSongsDao().getNewReleaseSongsCount()
-                }
+                },
+                search:{
+                    type: new GraphQLList(this.queryMaps.SongType),
+                    args: { 
+                        searchStr: { type: GraphQLString },
+                        userId: { type: GraphQLInt }
+                    },
+                    resolve: (parentValue, args) => this.objectFactory.getSongsDao().searchSongs(args.userId, args.searchStr)
+                },
             }
         });
     }

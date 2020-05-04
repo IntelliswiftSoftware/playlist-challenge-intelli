@@ -16,6 +16,7 @@ class QueryMaps {
     public ArtistType;
     public SongCategories;
     public CountType;
+    public SearchResultType;
 
     constructor(objectFactory: ObjectFactory){
         this.objectFactory = objectFactory;
