@@ -6,6 +6,7 @@ import { connectionObject, paginationConfig } from '../constants/dbConstants';
 
 class PgConnector {
     public conn;
+    private pgp;
     constructor() {
         const initOptions = {
             error(error, e) {
@@ -15,9 +16,14 @@ class PgConnector {
                 }
             }
         };
-        const pgp = pgPromise(initOptions);
-        this.conn = pgp(connectionObject);
+        this.pgp = pgPromise(initOptions);
+        this.conn = this.pgp(connectionObject);
         this.onConnect();
+    }
+
+    public disconnect(){
+        // shut down the connections
+        this.pgp.end();
     }
 
     public onConnect() {

@@ -24,6 +24,11 @@ class ObjectFactory {
         this.db = new DbConnector();
     }
 
+
+    public destroy(){
+        this.db.disconnect();
+    }
+    
     getDbInstance(){
         return this.db;
     }

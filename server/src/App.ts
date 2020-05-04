@@ -30,6 +30,10 @@ class App {
     this.mountRoutes();
   }
 
+  public destroy(){
+    this.objectFactory.destroy();
+  }
+
   private mountRoutes (): void {
 
     this.app.get('',(req, res)=>{
