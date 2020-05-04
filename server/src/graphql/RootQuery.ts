@@ -101,6 +101,14 @@ class RootQuery {
                     },
                     resolve: (parentValue, args) => this.objectFactory.getSongsDao().searchSongs(args.userId, args.searchStr)
                 },
+                searchPlayList:{
+                    type: new GraphQLList(this.queryMaps.PlaylistType),
+                    args: { 
+                        searchStr: { type: GraphQLString },
+                        userId: { type: GraphQLInt }
+                    },
+                    resolve: (parentValue, args) => this.objectFactory.getPlayListsDao().searchPlaylists(args.userId, args.searchStr)
+                }
             }
         });
     }

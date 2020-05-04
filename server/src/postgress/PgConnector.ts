@@ -1,7 +1,8 @@
 import pgPromise from 'pg-promise';
-import { connectionObject, paginationConfig } from '../constants/dbConstants';
-// import async from 'async-parallel';
 import parallel from 'async/parallel';
+
+import { connectionObject, paginationConfig } from '../constants/dbConstants';
+
 
 class PgConnector {
     public conn;
@@ -55,7 +56,18 @@ class PgConnector {
         return this.processDbResult(this.conn.many(query), options);
     }
 
-    public any(query) {
+    public any(query, options) {
+
+        if ( options && options.pagination ){
+            // apply default limit 
+            let limit = paginationConfig.pageNumber * paginationConfig.pageSize;
+
+            if ( options.pageNumber > 0 && options.pageSize > 0) {
+                limit = options.pageSize * options.pageNumber;
+            }
+            query+= ` limit ${limit}`;
+        }
+
         return this.processDbResult(this.conn.any(query), null);
     }
 
@@ -67,7 +79,7 @@ class PgConnector {
         let promise = new Promise((resolve, reject) => {
             parallel(queries.map((query) => {
                 return (callback) => {
-                    this.any(query).then(data => {
+                    this.any(query, null).then(data => {
                         callback(null, data);
                     }).catch(err => {
                         callback(null, err);

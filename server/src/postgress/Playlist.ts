@@ -39,6 +39,11 @@ class Playlist {
         return this.db.one(query);
     }
 
+    public searchPlaylists(userId: number, input: string) {
+        const query = `SELECT * FROM ${tableNames.PLAYLIST} where title like '%${input}%' and userId = ${userId}`;
+        return this.db.any(query);
+    }
+
 }
 
 export default Playlist;

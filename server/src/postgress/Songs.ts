@@ -136,7 +136,7 @@ class Songs {
 
     public getSongsLiked(userId: number) {
         const query = `SELECT * FROM ${tableNames.SONGS} where id in ( select songId from ${tableNames.SONGS_LIKES_MAP} WHERE userId = ${userId})`;
-        return this.prepareSongsList(userId,query,null);
+        return this.db.any(query);
     }
 
     public searchSongs(userId: number, input: string) {
@@ -169,7 +169,7 @@ class Songs {
          */
         let promise = new Promise((resolve, reject) => {
 
-            this.db.many(query, options).then( Songslist => {
+            this.db.any(query, options).then( Songslist => {
              
                 let songIds = Songslist.map( s => s.id );
 
