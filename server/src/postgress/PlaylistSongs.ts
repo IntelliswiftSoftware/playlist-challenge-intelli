@@ -21,28 +21,18 @@ class PlaylistSongs {
     }
 
     public insertPlaylistSongs(PlaylistSongsObjects) {
-        let boolSuccess = true;
-        for (const playlistSongsObject of PlaylistSongsObjects) {
+        const queries = []
+        for ( const playlistSongsObject of PlaylistSongsObjects ) {
             const query = `INSERT INTO ${tableNames.PLAYLIST_SONGS} (songId, playlistId, createDate)
             VALUES ( '${playlistSongsObject.songId}', '${playlistSongsObject.playlistId}', now())`;
-            this.db.any(query).then(data => {
-                boolSuccess = true;
-            }).catch(err => {
-                boolSuccess = false;
-                console.log('Error', err);
-            });
+            queries.push(query);
         }
-        if(boolSuccess){
+        return this.db.multiInsert(queries).then(data => {
             return {
-                message: 'Songs Added successfully to playlist.',
-                success: boolSuccess,
+                message: 'Song added successfully into playlist',
+                success: true
             }
-        } else{
-            return {
-                message: 'Failed to add songs in  playlist.',
-                success: boolSuccess,
-            }
-        }
+        });
     }
 }
 
