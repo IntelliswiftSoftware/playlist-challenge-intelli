@@ -1,4 +1,5 @@
-import { tableNames, recentPlayedSongsCount } from '../constants/dbConstants';
+import { tableNames } from '../constants/dbConstants';
+import { USERNAME_EXISTS_MESSAGE, USER_ADD_SUCCESS_MESSAGE } from '../constants/messages';
 
 import UserObject from '../interfaces/UserObject';
 
@@ -15,13 +16,13 @@ class Users {
         '${userObject.password}', ${userObject.imageId}, now())`;
         return this.db.any(query).then(data=>{
             return {
-                message: 'User added successfully',
+                message: USER_ADD_SUCCESS_MESSAGE,
                 success: true
             }
         }).catch(err=>{
             if ( err.message.indexOf('unique constraint "users_username_key"') ){
                 return {
-                    message: 'Could not add user, username already exists',
+                    message: USERNAME_EXISTS_MESSAGE,
                     success: false
                 }
             } else {

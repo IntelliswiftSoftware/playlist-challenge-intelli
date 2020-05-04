@@ -9,7 +9,8 @@ export const tableNames = {
     ALBUM_SONGS: 'album_songs ',
     PLAYLIST_SONGS: 'playlist_songs ',
     SONGS_LIKES_MAP: 'songs_likes_map ',
-    SONGS_PLAY_HISTORY: 'songs_play_history'
+    SONGS_PLAY_HISTORY: 'songs_play_history',
+    SONGS_MOOD_MAP:'songs_moods_map'
 }
 
 export const connectionObject = {
