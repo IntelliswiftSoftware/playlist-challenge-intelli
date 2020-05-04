@@ -1,4 +1,5 @@
 import { tableNames } from '../constants/dbConstants';
+import { SONG_ADD_SUCCESS_MESSAGE, SONG_DELETE_SUCCESS_MESSAGE } from '../constants/messages';
 import PlaylistSongsObject from '../interfaces/PlaylistSongsObject';
 
 class PlaylistSongs {
@@ -12,7 +13,7 @@ class PlaylistSongs {
         const query = `DELETE FROM ${tableNames.PLAYLIST_SONGS} WHERE songId in ( ${songId} )  AND playlistId  in ( ${playlistId} )`;
         return this.db.any(query).then(data => {
             return {
-                message: 'Song deleted successfully from playlist',
+                message: SONG_DELETE_SUCCESS_MESSAGE,
                 success: true
             }
         }).catch(err => {
@@ -29,7 +30,7 @@ class PlaylistSongs {
         }
         return this.db.multiInsert(queries).then(data => {
             return {
-                message: 'Song added successfully into playlist',
+                message: SONG_ADD_SUCCESS_MESSAGE,
                 success: true
             }
         });

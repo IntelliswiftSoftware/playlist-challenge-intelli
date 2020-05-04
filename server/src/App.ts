@@ -1,7 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import expressGraphQL from 'express-graphql';
-
+import cors from 'cors';
 import AppSchema from './graphql/AppSchema';
 import ObjectFactory from './util/ObjectFactory';
 
@@ -12,6 +12,13 @@ class App {
   constructor () {
     this.app = express();
     this.app.use(bodyParser.json());
+
+    const corsOptions = {
+      origin: "http://localhost:3001"
+    };
+
+    this.app.use(cors(corsOptions));
+
     this.objectFactory = new ObjectFactory();
 
     this.app.use('/songPlaylist', expressGraphQL({
