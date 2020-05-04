@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import request  from 'request';
+import axios  from 'axios';
 
 import App from '../App';
 
@@ -19,15 +19,17 @@ describe('Test App configuration', () => {
     });
 
     it('should return welcome message', (done) => {
-       
-        request({
-            method: 'GET',
-            url: 'http://localhost:' + serverPort
-          }, (err, r, body) => {
-            expect(body).to.equal('Hello Welcome to playlist challenge.');
-            done()
-          })
-
+        
+        axios.get('http://localhost:' + serverPort)
+        .then( (response) => {
+          expect(response.data).to.equal('Hello Welcome to playlist challenge.');
+          done();
+        })
+        .catch( (error) => {
+          expect(error).to.equal(null);
+          done();
+        })
+    
     });
 
 });
