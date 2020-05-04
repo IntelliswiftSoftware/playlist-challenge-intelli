@@ -1,0 +1,78 @@
+schema {
+  query: RootQueryType
+  mutation: Mutation
+}
+
+type Artist {
+  id: ID
+  firstname: String
+  username: String
+  lastname: String
+  age: Int
+  gender: String
+  image: Image
+}
+
+type Image {
+  id: ID
+  low: String
+  mid: String
+  high: String
+}
+
+type Mutation {
+  addUser(username: String!, firstname: String!, lastname: String!, age: Int, gender: String, password: String): ReturnObject
+  deleteUser(id: ID!): ReturnObject
+  addPlaylist(title: String!, userId: Int!): ReturnObject
+  addSongToPlaylist(songId: Int!, playlistId: Int!): ReturnObject
+  deleteSongFromPlaylist(songId: Int!, playlistId: Int!): ReturnObject
+}
+
+type Playlist {
+  id: ID
+  title: String
+  imageid: Int
+  userid: Int
+  songs: [Song]
+  image: Image
+}
+
+type ReturnObject {
+  message: ID
+  success: Boolean
+}
+
+type RootQueryType {
+  user(id: ID): User
+  playlists(id: ID): Playlist
+  images(id: ID): [Image]
+  artists(id: ID): [Artist]
+  mostPlayedsongs: [Song]
+  mostlikedSongs: [Song]
+}
+
+type Song {
+  id: ID
+  artistid: Int
+  imageid: String
+  duration: Int
+  source: String
+  title: String
+  genreid: String
+  image: Image
+  artist: Artist
+}
+
+type User {
+  id: ID
+  firstname: String
+  username: String
+  lastname: String
+  age: Int
+  gender: String
+  playlists: [Playlist]
+  image: Image
+  likedsongs: [Song]
+  recentsongs: [Song]
+}
+

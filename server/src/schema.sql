@@ -3,6 +3,8 @@ DROP DATABASE song_playlist;
 
 CREATE DATABASE song_playlist;
 
+\c song_playlist;
+
 CREATE TABLE images (
 id serial PRIMARY KEY, 
 low varchar(1000) NOT NULL,
