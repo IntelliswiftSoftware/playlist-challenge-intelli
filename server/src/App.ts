@@ -14,7 +14,8 @@ class App {
     this.app.use(bodyParser.json());
 
     const corsOptions = {
-      origin: "http://localhost:3001"
+        origin: "*",
+        methods: "GET,POST"
     };
 
     this.app.use(cors(corsOptions));
