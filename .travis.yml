@@ -3,6 +3,7 @@ matrix:
     -
       before_script:
         - "cd server"
+        - "npm install"
       script: "npm test"
       language: node_js
       node_js:
