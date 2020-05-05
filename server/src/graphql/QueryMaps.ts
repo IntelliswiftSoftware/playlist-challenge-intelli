@@ -151,8 +151,10 @@ class QueryMaps {
                 },
                 songs: {
                     type: new GraphQLList(this.SongType),
-                    resolve: (parentValue, args) => {    
-                        return this.objectFactory.getSongsDao().getPlayListSongsByArtist(1, parentValue.id);
+                    resolve: (parentValue, args,context, resolveInfo) => {    
+                        let userId = resolveInfo.operation.selectionSet.selections[0]['arguments'].
+                        find( a => a.name.value === 'userId' ).value.value;
+                        return this.objectFactory.getSongsDao().getPlayListSongsByArtist(userId, parentValue.id);
                     } 
                 },
             })
