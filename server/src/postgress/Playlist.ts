@@ -44,6 +44,11 @@ class Playlist {
         return this.db.any(query);
     }
 
+    public getPlaylistBySongId(songId: number, userId: number) {
+        const query = `SELECT * FROM ${tableNames.PLAYLIST} WHERE 
+        id in ( select playlistId from ${tableNames.PLAYLIST_SONGS} where songid = ${songId}) and userId = ${userId}`;
+        return this.db.any(query);
+    }
 }
 
 export default Playlist;

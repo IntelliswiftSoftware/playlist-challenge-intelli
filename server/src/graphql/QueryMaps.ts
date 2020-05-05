@@ -80,6 +80,20 @@ class QueryMaps {
                 title: { type: GraphQLString },
                 genreid: { type: GraphQLInt },
                 isLiked: { type: GraphQLBoolean },
+                playlists: {
+                    type: new GraphQLList(this.PlaylistType),
+                    resolve: (parentValue, args, context, resolveInfo) => {
+                        // read parent resolve arguments, user id is not passed to child queries
+                        let userIdKey = 'userId';
+                        if (resolveInfo.operation.selectionSet.selections[0]['name'].value === 'user' ) {
+                            userIdKey = 'id';
+                        }
+                        let userId = resolveInfo.operation.selectionSet.selections[0]['arguments'].
+                        find( a => a.name.value === userIdKey ).value.value;
+
+                        return this.objectFactory.getPlayListsDao().getPlaylistBySongId(parentValue.id, userId)
+                    } 
+                },
                 image: {
                     type: this.ImageType,
                     resolve: (parentValue, args) => this.objectFactory.getSongsDao().getImageBySongId(parentValue.id)
