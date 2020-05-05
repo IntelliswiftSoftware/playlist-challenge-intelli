@@ -27,14 +27,16 @@ class PgConnector {
     }
 
     public onConnect() {
-        this.conn.connect()
+        return this.conn.connect()
             .then(obj => {
                 // Can check the server version here (pg-promise v10.1.0+):
                 const serverVersion = obj.client.serverVersion;
                 obj.done(); // success, release the connection;
+                return serverVersion;
             })
             .catch(error => {
                 console.log('Error', error.message || error);
+                return error;
             });
     }
 

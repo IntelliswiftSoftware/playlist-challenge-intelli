@@ -8,8 +8,9 @@ class Songs {
         this.db = db;
     }
 
-    public insertSong(artistId, imageId, duration, source, genreId) {
-        const query = `INSERT INTO ${tableNames.SONGS} (id, artistId, imageId, duration, source, genreId) VALUES ('${artistId}', '${imageId}', ${duration}, '${source}', '${genreId}')`;
+    public insertSong(title, artistId, imageId, duration, source, genreId,createdBy) {
+        const query = `INSERT INTO ${tableNames.SONGS} (title, artistId, imageId, duration, source, genreId, createDate, createdBy)
+        VALUES ('${title}','${artistId}', '${imageId}', ${duration}, '${source}', '${genreId}',now(),${createdBy})`;
         return this.db.any(query);
     }
 

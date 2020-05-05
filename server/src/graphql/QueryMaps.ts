@@ -74,11 +74,11 @@ class QueryMaps {
             fields: ()=>({
                 id: { type: GraphQLID },
                 artistid: { type: GraphQLInt },
-                imageid: { type: GraphQLString },
+                imageid: { type: GraphQLInt },
                 duration: { type: GraphQLInt },
                 source: { type: GraphQLString },
                 title: { type: GraphQLString },
-                genreid: { type: GraphQLString },
+                genreid: { type: GraphQLInt },
                 isLiked: { type: GraphQLBoolean },
                 image: {
                     type: this.ImageType,

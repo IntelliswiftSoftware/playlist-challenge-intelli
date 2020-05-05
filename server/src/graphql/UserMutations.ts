@@ -21,9 +21,9 @@ class UserMutations {
                 username: { type: new GraphQLNonNull( GraphQLString )},
                 firstname: { type: new GraphQLNonNull( GraphQLString )},
                 lastname: { type: new GraphQLNonNull( GraphQLString )},
-                age: { type: GraphQLInt },
-                gender: { type: GraphQLString },
-                password: { type: GraphQLString }
+                age: { type: new GraphQLNonNull( GraphQLInt )},
+                gender: { type: new GraphQLNonNull( GraphQLString )},
+                password: { type: new GraphQLNonNull( GraphQLString )}
             },
             resolve: (parentValue, args)  => {
                 const newUser: UserObject = {
