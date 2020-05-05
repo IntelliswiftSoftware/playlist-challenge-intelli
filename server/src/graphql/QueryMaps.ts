@@ -119,7 +119,8 @@ class QueryMaps {
                 id: { type: GraphQLID },
                 low: { type: GraphQLString },
                 mid: { type: GraphQLString },
-                high: { type: GraphQLString }
+                high: { type: GraphQLString },
+                basepath: { type: GraphQLString }
             })
         });
 
