@@ -14,11 +14,11 @@ export const tableNames = {
 }
 
 export const connectionObject = {
-    host: 'localhost',
+    host: 'samsungdemo.czetxvdsehbl.us-east-1.rds.amazonaws.com',
     port: 5432,
-    database: 'song_playlist',
+    database: 'samsungdemo',
     user: 'postgres',
-    password: 'codemaster',
+    password: 'SamsungDemo$123',
     max: 30,
     poolIdleTimeout: 10000 
 }

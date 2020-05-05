@@ -148,7 +148,13 @@ class QueryMaps {
                 image: {
                     type: this.ImageType,
                     resolve: (parentValue, args) => this.objectFactory.getArtistsDao().getImageByArtistId(parentValue.id)
-                }
+                },
+                songs: {
+                    type: new GraphQLList(this.SongType),
+                    resolve: (parentValue, args) => {    
+                        return this.objectFactory.getSongsDao().getPlayListSongsByArtist(1, parentValue.id);
+                    } 
+                },
             })
         });
 

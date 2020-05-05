@@ -140,6 +140,11 @@ class Songs {
         return this.db.any(query);
     }
 
+    public getPlayListSongsByArtist(userId: number, artistId: number) {
+        const query = `SELECT * FROM ${tableNames.SONGS} where artistId = ${artistId}`;
+        return this.prepareSongsList(userId,query,null);
+    }
+    
     public searchSongs(userId: number, input: string) {
         const query = `SELECT * FROM ${tableNames.SONGS} where title like '%${input}%' or 
         artistId in ( SELECT id FROM ${tableNames.ARTISTS} where firstname like '%${input}%' or lastname like '%${input}%' )`;

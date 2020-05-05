@@ -43,7 +43,10 @@ class RootQuery {
                 },
                 artists:{
                     type: new GraphQLList(this.queryMaps.ArtistType),
-                    args: { id: { type: GraphQLID }},
+                    args: { 
+                        id: { type: GraphQLID },
+                        userId: { type: GraphQLInt }
+                    },
                     resolve: (parentValue, args) => this.objectFactory.getArtistsDao().getArtists(args.id)
                 },
                 mostPlayedsongs:{
