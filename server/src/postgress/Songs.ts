@@ -173,7 +173,12 @@ class Songs {
 
     public getSongsLiked(userId: number) {
         const query = `SELECT * FROM ${tableNames.SONGS} where id in ( select songId from ${tableNames.SONGS_LIKES_MAP} WHERE userId = ${userId})`;
-        return this.db.any(query);
+        return this.db.any(query).then(data=> {
+            return data.map( s => {
+                s['isLiked'] = true;
+                return s;
+            })
+        });
     }
 
     public getPlayListSongsByArtist(userId: number, artistId: number) {
