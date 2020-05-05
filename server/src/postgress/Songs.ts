@@ -16,10 +16,10 @@ class Songs {
     public insertLikeSong(userId: number, songId: number) {
 
         /**
-       * Insert play song event for user, if song already exists then increment the count
+       * Insert like song event for user, if song already exists then skip
        */
 
-      const insertquery = `INSERT INTO ${tableNames.SONGS_LIKES_MAP} ( songId, userId, lastplayDate )
+      const insertquery = `INSERT INTO ${tableNames.SONGS_LIKES_MAP} ( songId, userId, createDate )
       VALUES (${songId}, ${userId}, now())`;
      
       const selectquery = `select songId from ${tableNames.SONGS_LIKES_MAP} where userId = ${userId} and songId = ${songId}`;
