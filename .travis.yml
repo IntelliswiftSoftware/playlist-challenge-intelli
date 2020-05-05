@@ -1,0 +1,15 @@
+matrix:
+  include:
+    -
+      before_script:
+        - "cd server"
+      script: "npm test"
+      language: node_js
+      node_js:
+      - '8'
+      - '10'
+      - '12'
+notifications:
+  email:
+    - 
+sudo: required
