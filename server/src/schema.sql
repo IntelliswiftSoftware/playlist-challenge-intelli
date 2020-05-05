@@ -5,10 +5,10 @@ CREATE DATABASE song_playlist;
 
 CREATE TABLE images (
 id serial PRIMARY KEY, 
-low varchar(1000) NOT NULL,
-mid varchar(1000) NOT NULL,
-high varchar(1000) NOT NULL,
-basepath varchar(1000) NOT NULL
+low varchar(250) NOT NULL,
+mid varchar(250) NOT NULL,
+high varchar(250) NOT NULL,
+basepath varchar(250) NOT NULL
 );
 
 
@@ -74,7 +74,7 @@ createdBy integer DEFAULT NULL
 
 
 CREATE TABLE album_songs (
-id serial PRIMARY KEY, 
+id serial, 
 songId integer REFERENCES songs (id), 
 albumId integer REFERENCES album (id),
 playOrder integer NOT NULL 
@@ -82,7 +82,7 @@ playOrder integer NOT NULL
 
 
 CREATE TABLE playlist_songs (
-id serial PRIMARY KEY, 
+id serial, 
 songId integer REFERENCES songs (id),
 playlistId integer REFERENCES playlists (id),
 createDate timestamp NOT NULL 
@@ -90,13 +90,13 @@ createDate timestamp NOT NULL
 
 
 CREATE TABLE songs_moods_map (
-id serial PRIMARY KEY, 
+id serial, 
 songId integer REFERENCES songs (id), 
 moodId integer REFERENCES song_categories (id) 
 );
 
 CREATE TABLE songs_likes_map (
-id serial PRIMARY KEY, 
+id serial, 
 songId integer REFERENCES songs (id), 
 userId integer REFERENCES users (id),
 createDate timestamp NOT NULL
@@ -104,7 +104,7 @@ createDate timestamp NOT NULL
 
 
 CREATE TABLE songs_play_history (
-id serial PRIMARY KEY, 
+id serial, 
 songId integer REFERENCES songs (id), 
 userId integer REFERENCES users (id),
 lastplayDate timestamp NOT NULL,
