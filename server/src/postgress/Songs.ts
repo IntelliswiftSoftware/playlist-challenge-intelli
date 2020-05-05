@@ -1,5 +1,5 @@
 import { tableNames, mostplayedSongsCount, mostLikeSongsCount, recentPlayedSongsCount } from '../constants/dbConstants';
-import { SONG_PLAY_EVENT_SUCCESS } from '../constants/messages';
+import { SONG_PLAY_EVENT_SUCCESS, SONG_LIKE_EVENT_SUCCESS } from '../constants/messages';
 
 class Songs {
     private db;
@@ -13,7 +13,43 @@ class Songs {
         VALUES ('${title}','${artistId}', '${imageId}', ${duration}, '${source}', '${genreId}',now(),${createdBy})`;
         return this.db.any(query);
     }
+    public insertLikeSong(userId: number, songId: number) {
 
+        /**
+       * Insert play song event for user, if song already exists then increment the count
+       */
+
+      const insertquery = `INSERT INTO ${tableNames.SONGS_LIKES_MAP} ( songId, userId, lastplayDate )
+      VALUES (${songId}, ${userId}, now())`;
+     
+      const selectquery = `select songId from ${tableNames.SONGS_LIKES_MAP} where userId = ${userId} and songId = ${songId}`;
+     
+      let promise = new Promise((resolve, reject) => {
+
+          this.db.one(selectquery).then( Song => {
+
+            resolve( {
+                message: SONG_LIKE_EVENT_SUCCESS,
+                success: true
+            });
+
+          }).catch( err => {
+              if ( err.message === 'No data returned from the query.') {
+                  this.db.any(insertquery).then( data => {
+                      resolve( {
+                          message: SONG_LIKE_EVENT_SUCCESS,
+                          success: true
+                      });
+                  }).catch(err => reject(err));
+              }
+          });
+          
+        });
+
+      return promise;
+
+     
+  }
     public insertPlaySong(userId: number, songId: number, playCount: number) {
 
           /**
