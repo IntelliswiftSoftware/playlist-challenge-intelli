@@ -1,3 +1,7 @@
+import debugLib from 'debug';
+
+const debug = debugLib('Users');
+
 import { tableNames } from '../constants/dbConstants';
 import { USERNAME_EXISTS_MESSAGE, USER_ADD_SUCCESS_MESSAGE } from '../constants/messages';
 
@@ -20,6 +24,7 @@ class Users {
                 success: true
             }
         }).catch(err=>{
+            debug('Eror in insert user', err.message);
             if ( err.message.indexOf('unique constraint "users_username_key"') ){
                 return {
                     message: USERNAME_EXISTS_MESSAGE,
@@ -36,6 +41,9 @@ class Users {
     }
 
     public deleteUser(userId: number) {
+
+        //TODO: delete user id from refercne tables
+
         const query = `DELETE FROM ${tableNames.USERS} WHERE id=${userId}`;
         return this.db.any(query).then(data => {
             return {
@@ -43,7 +51,7 @@ class Users {
                 success: true
             }
         }).catch(err=>{
-            console.log('Eror in error', err);
+            debug('Eror in deleting user', err);
         });
     }
 

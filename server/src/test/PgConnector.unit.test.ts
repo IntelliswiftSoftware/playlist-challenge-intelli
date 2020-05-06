@@ -47,7 +47,6 @@ describe('Test PgConnector methods', () => {
             expect( Array.isArray(data) && data.length === 0 ).to.equal(true);
             done();
         }).catch(err => {
-            console.log(err);
             expect( typeof err ).to.equal(undefined);
             done();
         })
