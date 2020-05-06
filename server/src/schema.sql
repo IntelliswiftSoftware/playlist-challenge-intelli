@@ -36,8 +36,8 @@ modifiedDate timestamp NOT NULL
 
 CREATE TABLE song_categories (
 id serial PRIMARY KEY, 
-name  varchar(1000) NOT NULL,
-description varchar(1000) NOT NULL,
+name  varchar(250) NOT NULL,
+description varchar(250) NOT NULL,
 imageId integer REFERENCES images (id),
 isMood boolean DEFAULT false 
 );

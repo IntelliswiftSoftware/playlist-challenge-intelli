@@ -10,7 +10,7 @@ class PlaylistSongs {
     }
 
     public deletePlaylistSong(songId: string, playlistId: string) {
-        const query = `DELETE FROM ${tableNames.PLAYLIST_SONGS} WHERE songId in ( ${songId} )  AND playlistId  in ( ${playlistId} )`;
+        const query = `DELETE FROM ${tableNames.PLAYLIST_SONGS} WHERE songId IN ( ${songId} )  AND playlistId  IN ( ${playlistId} )`;
         return this.db.any(query).then(data => {
             return {
                 message: SONG_DELETE_SUCCESS_MESSAGE,

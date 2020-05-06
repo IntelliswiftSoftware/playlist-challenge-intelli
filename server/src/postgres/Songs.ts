@@ -21,9 +21,7 @@ class Songs {
 
       const insertquery = `INSERT INTO ${tableNames.SONGS_LIKES_MAP} ( songId, userId, createDate )
       VALUES (${songId}, ${userId}, now())`;
-     
-      const selectquery = `select songId from ${tableNames.SONGS_LIKES_MAP} where userId = ${userId} and songId = ${songId}`;
-     
+      const selectquery = `SELECT songId FROM ${tableNames.SONGS_LIKES_MAP} WHERE userId = ${userId} AND songId = ${songId}`;
       let promise = new Promise((resolve, reject) => {
 
           this.db.one(selectquery).then( Song => {
@@ -43,12 +41,9 @@ class Songs {
                   }).catch(err => reject(err));
               }
           });
-          
         });
 
       return promise;
-
-     
   }
     public insertPlaySong(userId: number, songId: number, playCount: number) {
 
@@ -58,15 +53,11 @@ class Songs {
 
         const insertquery = `INSERT INTO ${tableNames.SONGS_PLAY_HISTORY} ( songId, userId, lastplayDate, playCount )
         VALUES (${songId}, ${userId}, now(), ${playCount})`;
-       
-        const selectquery = `select songId, playCount from ${tableNames.SONGS_PLAY_HISTORY} where userId = ${userId} and songId = ${songId}`;
-       
+        const selectquery = `SELECT songId, playCount FROM ${tableNames.SONGS_PLAY_HISTORY} WHERE userId = ${userId} AND songId = ${songId}`;
         let promise = new Promise((resolve, reject) => {
-
             this.db.one(selectquery).then( Song=> {
-            
                 const updateQuery = `update ${tableNames.SONGS_PLAY_HISTORY} set playcount = ${ Song.playcount + playCount }
-                where userId = ${userId} and songId = ${songId}`;
+                WHERE userId = ${userId} AND songId = ${songId}`;
 
                 this.db.any(updateQuery).then( data => {
                     resolve( {
@@ -76,7 +67,6 @@ class Songs {
                 }).catch(err => reject(err));
 
             }).catch( err => {
-               
                 if ( err.message === 'No data returned from the query.') {
                     this.db.any(insertquery).then( data => {
                         resolve( {
@@ -85,17 +75,12 @@ class Songs {
                         });
                     }).catch(err => reject(err));
                 }
-                
             });
-            
           });
 
         return promise;
-
-       
     }
 
-    
     public deleteSong(songId) {
         const query = `DELETE FROM ${tableNames.SONGS} WHERE id=${songId}`;
         return this.db.any(query);
@@ -130,28 +115,28 @@ class Songs {
     }
 
     public getPlayListSongs(userId: number, playlistId) {
-        const query = `SELECT * FROM ${tableNames.SONGS} WHERE id in ( SELECT songId FROM playlist_songs where playlistId = ${playlistId} )`;
+        const query = `SELECT * FROM ${tableNames.SONGS} WHERE id IN ( SELECT songId FROM playlist_songs WHERE playlistId = ${playlistId} )`;
         return this.prepareSongsList(userId,query,null);
     }
 
     public getImageBySongId(id: number) {
-        const query = `SELECT * FROM ${tableNames.IMAGES} where id in ( select imageid from ${tableNames.SONGS} WHERE id = ${id} )`;
+        const query = `SELECT * FROM ${tableNames.IMAGES} WHERE id IN ( SELECT imageid FROM ${tableNames.SONGS} WHERE id = ${id} )`;
         return this.db.one(query);
     }
 
     public getSongArtist(id: number) {
-        const query = `SELECT * FROM ${tableNames.ARTISTS} where id in ( select artistid from ${tableNames.SONGS} WHERE id = ${id} )`;
+        const query = `SELECT * FROM ${tableNames.ARTISTS} WHERE id IN ( SELECT artistid FROM ${tableNames.SONGS} WHERE id = ${id} )`;
         return this.db.one(query);
     }
     public getMostPlayedSongs(userId: number) {
-        const query = `select * from ${tableNames.SONGS} where id in
-        ( select songid from ${tableNames.SONGS_PLAY_HISTORY} GROUP BY  songid ORDER BY sum(playCount) desc limit ${mostplayedSongsCount})`;
+        const query = `SELECT * FROM ${tableNames.SONGS} WHERE id IN
+        ( SELECT songid FROM ${tableNames.SONGS_PLAY_HISTORY} GROUP BY  songid ORDER BY sum(playCount) desc LIMIT ${mostplayedSongsCount})`;
         return this.prepareSongsList(userId,query,null);
     }
 
     public getmostlikedSongs(userId: number) {
-        const query = `SELECT * FROM ${tableNames.SONGS} where id 
-        in(SELECT songId FROM ${tableNames.SONGS_LIKES_MAP} GROUP BY songId ORDER BY songid desc limit  ${mostLikeSongsCount} )`;
+        const query = `SELECT * FROM ${tableNames.SONGS} WHERE id 
+        IN (SELECT songId FROM ${tableNames.SONGS_LIKES_MAP} GROUP BY songId ORDER BY songid desc LIMIT  ${mostLikeSongsCount} )`;
         return this.prepareSongsList(userId,query,null);
     }
 
@@ -161,18 +146,18 @@ class Songs {
     }
 
     public getImageByCategoryId(id: number) {
-        const query = `SELECT * FROM ${tableNames.IMAGES} where id in ( select imageid from ${tableNames.SONG_CATEGORIES} WHERE id = ${id} )`;
+        const query = `SELECT * FROM ${tableNames.IMAGES} WHERE id IN ( SELECT imageid FROM ${tableNames.SONG_CATEGORIES} WHERE id = ${id} )`;
         return this.db.one(query);
     }
 
     public getRecentPlayedSongs(userId: number) {
-        const query = `SELECT * FROM ${tableNames.SONGS} where id in 
-        ( select songId from ${tableNames.SONGS_PLAY_HISTORY} WHERE userId = ${userId}  order by lastplaydate desc limit ${recentPlayedSongsCount})`;
+        const query = `SELECT * FROM ${tableNames.SONGS} WHERE id IN
+        ( SELECT songId FROM ${tableNames.SONGS_PLAY_HISTORY} WHERE userId = ${userId}  order by lastplaydate desc LIMIT ${recentPlayedSongsCount})`;
         return this.prepareSongsList(userId,query,null);
     }
 
     public getSongsLiked(userId: number) {
-        const query = `SELECT * FROM ${tableNames.SONGS} where id in ( select songId from ${tableNames.SONGS_LIKES_MAP} WHERE userId = ${userId})`;
+        const query = `SELECT * FROM ${tableNames.SONGS} WHERE id IN ( SELECT songId FROM ${tableNames.SONGS_LIKES_MAP} WHERE userId = ${userId})`;
         return this.db.any(query).then(data=> {
             return data.map( s => {
                 s['isLiked'] = true;
@@ -182,31 +167,28 @@ class Songs {
     }
 
     public getPlayListSongsByArtist(userId: number, artistId: number) {
-        const query = `SELECT * FROM ${tableNames.SONGS} where artistId = ${artistId}`;
-        return this.prepareSongsList(userId,query,null);
-    }
-    
-    public searchSongs(userId: number, input: string) {
-        const query = `SELECT * FROM ${tableNames.SONGS} where title like '%${input}%' or 
-        artistId in ( SELECT id FROM ${tableNames.ARTISTS} where firstname like '%${input}%' or lastname like '%${input}%' )`;
+        const query = `SELECT * FROM ${tableNames.SONGS} WHERE artistId = ${artistId}`;
         return this.prepareSongsList(userId,query,null);
     }
 
-    
+    public searchSongs(userId: number, input: string) {
+        const query = `SELECT * FROM ${tableNames.SONGS} WHERE title LIKE '%${input}%' OR 
+        artistId IN ( SELECT id FROM ${tableNames.ARTISTS} WHERE firstname LIKE '%${input}%' OR lastname LIKE '%${input}%' )`;
+        return this.prepareSongsList(userId,query,null);
+    }
 
     public getUserSongIdsLiked(userId: number, songIdList: Array<number>) {
         /**
          * Return list of song ids which are liked by the user from the given list of song ids
          */
-    
+
         let songIds = '';
         songIdList.forEach( id => songIds+=id+',');
         songIds=songIds.substr(0,songIds.length-1);
-        const query = `SELECT id FROM ${tableNames.SONGS} where id in
-        ( select songId from ${tableNames.SONGS_LIKES_MAP} WHERE userId = ${userId} and songId in (${songIds}))`;
+        const query = `SELECT id FROM ${tableNames.SONGS} WHERE id IN
+        ( SELECT songId FROM ${tableNames.SONGS_LIKES_MAP} WHERE userId = ${userId} AND songId IN (${songIds}))`;
 
         return this.db.many(query).then( data => data ).catch(err=>{
-           
         });
     }
 
