@@ -4,6 +4,10 @@ import ObjectFactory from '../util/ObjectFactory';
 import QueryMaps from './QueryMaps';
 import PlaylistObject from '../interfaces/PlaylistObject';
 
+/**
+ * This class manages the playlist mutations.
+ */
+
 class PlaylistMutations {
 
     private objectFactory: ObjectFactory;

@@ -85,16 +85,19 @@ class Songs {
         return promise;
     }
 
+    // Delete Song by song id
     public deleteSong(songId) {
         const query = `DELETE FROM ${tableNames.SONGS} WHERE id=${songId}`;
         return this.db.any(query);
     }
 
+    // Get songs by id
     public getSongById(userId: number, songId: number) {
         const query = `SELECT * FROM ${tableNames.SONGS} WHERE id = ${songId}`;
         return this.db.one(query);
     }
 
+    // Get songs by mood id
     public getSongByMood(userId: number,moodId: number) {
 
         const query = `SELECT s.*, smm.moodid FROM songs as s
@@ -104,11 +107,13 @@ class Songs {
         return this.prepareSongsList(userId,query,null);
     }
 
+    // Get songs by genre id
     public getSongByGenre(userId: number, genreId: number) {
         const query = `SELECT * FROM ${tableNames.SONGS} WHERE genreId = ${genreId}`;
         return this.prepareSongsList(userId,query,null);
     }
 
+    // Get new release songs
     public getNewReleaseSongs(pageSize: number, pageNumber: number, userId: number) {
         const query = `SELECT * FROM ${tableNames.SONGS} ORDER BY createDate desc`;
         return this.prepareSongsList(userId,query,{
@@ -118,48 +123,58 @@ class Songs {
         });
     }
 
+    // Get playlist songs by playlist id
     public getPlayListSongs(userId: number, playlistId) {
         const query = `SELECT * FROM ${tableNames.SONGS} WHERE id IN ( SELECT songId FROM playlist_songs WHERE playlistId = ${playlistId} )`;
         return this.prepareSongsList(userId,query,null);
     }
 
+    // Get image by song id
     public getImageBySongId(id: number) {
         const query = `SELECT * FROM ${tableNames.IMAGES} WHERE id IN ( SELECT imageid FROM ${tableNames.SONGS} WHERE id = ${id} )`;
         return this.db.one(query);
     }
 
+    // Get song artist by song id
     public getSongArtist(id: number) {
         const query = `SELECT * FROM ${tableNames.ARTISTS} WHERE id IN ( SELECT artistid FROM ${tableNames.SONGS} WHERE id = ${id} )`;
         return this.db.one(query);
     }
+
+    // Get most played songs by user id
     public getMostPlayedSongs(userId: number) {
         const query = `SELECT * FROM ${tableNames.SONGS} WHERE id IN
         ( SELECT songid FROM ${tableNames.SONGS_PLAY_HISTORY} GROUP BY  songid ORDER BY sum(playCount) desc LIMIT ${mostplayedSongsCount})`;
         return this.prepareSongsList(userId,query,null);
     }
 
+    // Get most liked songs by user id
     public getmostlikedSongs(userId: number) {
         const query = `SELECT * FROM ${tableNames.SONGS} WHERE id 
         IN (SELECT songId FROM ${tableNames.SONGS_LIKES_MAP} GROUP BY songId ORDER BY songid desc LIMIT  ${mostLikeSongsCount} )`;
         return this.prepareSongsList(userId,query,null);
     }
 
+    // Get new release songs count
     public getNewReleaseSongsCount() {
         const query = `SELECT count(*) as count FROM ${tableNames.SONGS}`;
         return this.db.one(query);
     }
 
+    // Get image by category id
     public getImageByCategoryId(id: number) {
         const query = `SELECT * FROM ${tableNames.IMAGES} WHERE id IN ( SELECT imageid FROM ${tableNames.SONG_CATEGORIES} WHERE id = ${id} )`;
         return this.db.one(query);
     }
 
+    // Get recent played songs by user id
     public getRecentPlayedSongs(userId: number) {
         const query = `SELECT * FROM ${tableNames.SONGS} WHERE id IN
         ( SELECT songId FROM ${tableNames.SONGS_PLAY_HISTORY} WHERE userId = ${userId}  order by lastplaydate desc LIMIT ${recentPlayedSongsCount})`;
         return this.prepareSongsList(userId,query,null);
     }
 
+    // Get Songs liked by user id
     public getSongsLiked(userId: number) {
         const query = `SELECT * FROM ${tableNames.SONGS} WHERE id IN ( SELECT songId FROM ${tableNames.SONGS_LIKES_MAP} WHERE userId = ${userId})`;
         return this.db.any(query).then(data=> {
@@ -170,11 +185,13 @@ class Songs {
         });
     }
 
+    // Get playlist songs by artist id
     public getPlayListSongsByArtist(userId: number, artistId: number) {
         const query = `SELECT * FROM ${tableNames.SONGS} WHERE artistId = ${artistId}`;
         return this.prepareSongsList(userId,query,null);
     }
 
+    // Search songs
     public searchSongs(userId: number, input: string) {
         const query = `SELECT * FROM ${tableNames.SONGS} WHERE title LIKE '%${input}%' OR 
         artistId IN ( SELECT id FROM ${tableNames.ARTISTS} WHERE firstname LIKE '%${input}%' OR lastname LIKE '%${input}%' )`;
@@ -203,18 +220,12 @@ class Songs {
         let promise = new Promise((resolve, reject) => {
 
             this.db.any(query, options).then( Songslist => {
-             
                 let songIds = Songslist.map( s => s.id );
-
                 this.getUserSongIdsLiked(userId,songIds).then(likedSongs => {
-                   
                     Songslist = this.tagLikedFlagOnSongs(Songslist, likedSongs);
                     resolve(Songslist);
-
                 }).catch( err => reject(err));
-
             }).catch( err => reject(err));
-
           });
 
         return promise;

@@ -4,6 +4,10 @@ import ObjectFactory from '../util/ObjectFactory';
 import QueryMaps from './QueryMaps';
 import UserObject from '../interfaces/UserObject';
 
+/**
+ * This class manages the user mutations.
+ */
+
 class UserMutations {
 
     private objectFactory: ObjectFactory;

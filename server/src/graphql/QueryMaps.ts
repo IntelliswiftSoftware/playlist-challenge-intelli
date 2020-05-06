@@ -3,6 +3,9 @@ import {
     GraphQLInt, GraphQLList
   } from 'graphql';
 
+/**
+ * This class map all GraphQLObjectTypes.
+ */
 
 import ObjectFactory from '../util/ObjectFactory';
 

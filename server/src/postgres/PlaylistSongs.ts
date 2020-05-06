@@ -16,6 +16,7 @@ class PlaylistSongs {
         this.db = db;
     }
 
+    // Delete song form playlists
     public deletePlaylistSong(songId: string, playlistId: string) {
         const query = `DELETE FROM ${tableNames.PLAYLIST_SONGS} WHERE songId IN ( ${songId} )  AND playlistId  IN ( ${playlistId} )`;
         return this.db.any(query).then(data => {
@@ -28,6 +29,7 @@ class PlaylistSongs {
         });
     }
 
+    // Insert song to playlists
     public insertPlaylistSongs(PlaylistSongsObjects) {
         const queries = []
         for ( const playlistSongsObject of PlaylistSongsObjects ) {

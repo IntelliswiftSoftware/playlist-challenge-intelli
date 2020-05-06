@@ -3,6 +3,10 @@ import { GraphQLObjectType, GraphQLID, GraphQLList, GraphQLInt, GraphQLString } 
 import QueryMaps from './QueryMaps';
 import ObjectFactory from '../util/ObjectFactory';
 
+/**
+ * This class manages the all queries.
+ */
+
 class RootQuery {
 
     private queryMaps;

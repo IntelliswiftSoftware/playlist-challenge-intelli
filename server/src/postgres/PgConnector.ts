@@ -91,6 +91,7 @@ class PgConnector {
         return this.processDbResult(this.conn.one(query), null);
     }
 
+    // Multi insert
     public multiInsert(queries:Array<string>) {
         let promise = new Promise((resolve, reject) => {
             parallel(queries.map((query) => {

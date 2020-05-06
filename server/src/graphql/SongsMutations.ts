@@ -4,6 +4,10 @@ import ObjectFactory from '../util/ObjectFactory';
 import QueryMaps from './QueryMaps';
 
 
+/**
+ * This class manages the song mutations.
+ */
+
 class SongsMutations {
 
     private objectFactory: ObjectFactory;

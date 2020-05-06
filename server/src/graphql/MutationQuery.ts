@@ -8,6 +8,10 @@ import PaylistSongMutations from './PaylistSongMutations';
 import SongsMutations from './SongsMutations';
 
 
+/**
+ * This class manages the all mutations.
+ * This class call mutations as per type.
+ */
 
 class MutationQuery {
 

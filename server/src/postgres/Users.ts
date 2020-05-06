@@ -18,6 +18,7 @@ class Users {
         this.db = db;
     }
 
+    // Insert user
     public insertUser(userObject: UserObject) {
         const query = `INSERT INTO ${tableNames.USERS} (username, firstname, lastname, age, gender, password, imageId, createDate)
         VALUES ( '${userObject.username}','${userObject.firstname}', '${userObject.lastname}', ${userObject.age}, '${userObject.gender}', 
@@ -44,6 +45,7 @@ class Users {
         });
     }
 
+    // Delete user by id
     public deleteUser(userId: number) {
 
         //TODO: delete user id from refercne tables
@@ -59,21 +61,25 @@ class Users {
         });
     }
 
+    // Get user by id
     public getUserById(userId: number) {
         const query = `SELECT * FROM ${tableNames.USERS} WHERE id = ${userId}`;
         return this.db.one(query);
     }
 
+    // Get user by username
     public getUserByUsername(username: string) {
         const query = `SELECT * FROM ${tableNames.USERS} WHERE username = ${username}`;
         return this.db.one(query);
     }
 
+    // Get user by id and password
     public getUserByIdPassword(username: string, password: string) {
         const query = `SELECT * FROM ${tableNames.USERS} WHERE username = '${username}' and password ='${password}'`;
         return this.db.one(query);
     }
 
+    // Get image by user id
     public getImageByUserId(userId: number) {
         const query = `SELECT * FROM ${tableNames.IMAGES} where id in ( select imageid from ${tableNames.USERS} WHERE id = ${userId} )`;
         return this.db.one(query);
