@@ -176,7 +176,7 @@ class Songs {
         return this.db.any(query).then(data=> {
             return data.map( s => {
                 s['isLiked'] = true;
-                return s;
+                return this.setSongDuration(s);
             })
         });
     }
@@ -242,9 +242,31 @@ class Songs {
             } else {
                 s['isLiked'] = false;
             }
-            return s;
+            return this.setSongDuration(s);
         });
 
+    }
+
+    private setSongDuration(Song){
+        /**
+         * Format duation on song to display in UI
+         */
+       if ( Song.duration <= 60) {
+            Song.duration += ':00';
+       } else {
+            let secs = Song.duration%60;
+            let secsStr = ''+secs;
+            if ( secs < 10) {
+                secsStr='0'+secs;;
+            }
+            let mins = parseInt(''+(Song.duration/60));
+            let minsStr = ''+mins;
+            if ( mins < 10) {
+                minsStr='0'+mins;;
+            }
+            Song.duration = `${minsStr}:${secsStr}`;
+       }
+       return Song;
     }
 }
 export default Songs;

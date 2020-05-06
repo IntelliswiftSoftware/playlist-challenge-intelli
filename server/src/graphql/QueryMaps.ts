@@ -75,7 +75,7 @@ class QueryMaps {
                 id: { type: GraphQLID },
                 artistid: { type: GraphQLInt },
                 imageid: { type: GraphQLInt },
-                duration: { type: GraphQLInt },
+                duration: { type: GraphQLString },
                 source: { type: GraphQLString },
                 title: { type: GraphQLString },
                 genreid: { type: GraphQLInt },
