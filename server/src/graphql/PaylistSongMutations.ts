@@ -25,9 +25,8 @@ class PaylistSongMutations {
                 const newPlaylistSongs = [];
                 const songIds = args.songId.split(',');
                 const playlistIds = args.playlistId.split(',');
-
                 for(let i=0; i<songIds.length; i++){
-                    for(const j=i; j<playlistIds.length;){
+                    for(let j=0; j<playlistIds.length; j++){
                         const songId = parseInt(songIds[i], 10);
                         const playlistId = parseInt(playlistIds[j], 10);
                         const newPlaylistSong: PlaylistSongsObject = {
@@ -35,7 +34,6 @@ class PaylistSongMutations {
                             playlistId
                         }
                         newPlaylistSongs.push(newPlaylistSong);
-                        break
                     }
                 }
                 return this.objectFactory.getPlaylistSongsDao().insertPlaylistSongs(newPlaylistSongs);
