@@ -1,3 +1,7 @@
+import debugLib from 'debug';
+
+const debug = debugLib('Playlist');
+
 import { tableNames } from '../constants/dbConstants';
 import PlaylistObject from '../interfaces/PlaylistObject';
 
@@ -10,13 +14,13 @@ class Playlist {
     public insertPlaylist(playlistObject: PlaylistObject) {
         const query = `INSERT INTO ${tableNames.PLAYLIST} (title, userId, imageId, createDate, modifiedDate)
         VALUES ( '${playlistObject.title}', '${playlistObject.userId}', ${playlistObject.imageId}, now(), now())`;
-        return this.db.any(query).then(data=>{
+        return this.db.any(query).then( data => {
             return {
                 message: 'Playlist added successfully',
                 success: true
             }
         }).catch(err=>{
-            console.log('Eror in error', err);
+            debug('Eror in insert playlist', err.message);
         });
     }
 
@@ -30,8 +34,7 @@ class Playlist {
     }
 
     public insertSongToPlaylist(playListId:number, songId:number) {
-        const id = 23;
-        const query = `INSERT INTO ${tableNames.PLAYLIST_SONGS} (id, songId, playlistId) VALUES (${id}, '${songId}', '${playListId}')`;
+        const query = `INSERT INTO ${tableNames.PLAYLIST_SONGS} ( songId, playlistId, createDate) VALUES ('${songId}', '${playListId}','now()')`;
         return this.db.one(query);
     }
     public getImageByPlaylistId(id: number) {

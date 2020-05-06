@@ -8,6 +8,12 @@ import Artists from '../postgres/Artists';
 import PlaylistSongs from '../postgres/PlaylistSongs';
 import SongCategories from '../postgres/SongCategories';
 
+
+/**
+ * The aim of this class is to create new instance of classes and provide accrosss application.
+ * A new instance of class is created only once.
+ */
+
 class ObjectFactory {
 
     private db : DbConnector;

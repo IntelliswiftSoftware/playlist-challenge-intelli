@@ -5,6 +5,10 @@ import cors from 'cors';
 import AppSchema from './graphql/AppSchema';
 import ObjectFactory from './util/ObjectFactory';
 
+/**
+ * This class configures the express app and creates a grapql endpoint.
+ */
+
 class App {
   public app
   private objectFactory: ObjectFactory;

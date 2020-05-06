@@ -43,7 +43,6 @@ describe('Test Users functionalities', () => {
                 expect(response.data.data.user.id == id).to.equal(true);
                 done();
             }).catch(function (error) {
-                console.log(error)
                 done();
             });
     

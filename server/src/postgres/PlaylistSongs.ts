@@ -1,6 +1,10 @@
+import debugLib from 'debug';
+
+const debug = debugLib('PlaylistSongs');
+
 import { tableNames } from '../constants/dbConstants';
 import { SONG_ADD_SUCCESS_MESSAGE, SONG_DELETE_SUCCESS_MESSAGE } from '../constants/messages';
-import PlaylistSongsObject from '../interfaces/PlaylistSongsObject';
+
 
 class PlaylistSongs {
     private db;
@@ -17,7 +21,7 @@ class PlaylistSongs {
                 success: true
             }
         }).catch(err => {
-            console.log('Eror in error', err);
+            debug('Eror in deleting song from playlist', err.message);
         });
     }
 

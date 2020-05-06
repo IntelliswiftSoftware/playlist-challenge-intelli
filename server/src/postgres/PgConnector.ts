@@ -1,6 +1,10 @@
 import pgPromise from 'pg-promise';
 import parallel from 'async/parallel';
 
+import debugLib from 'debug';
+
+const debug = debugLib('PgConnector');
+
 import { connectionObject, paginationConfig } from '../constants/dbConstants';
 
 
@@ -11,8 +15,7 @@ class PgConnector {
         const initOptions = {
             error(error, e) {
                 if (e.cn) {
-                    console.log('CN:', e.cn);
-                    console.log('EVENT:', error.message || error);
+                    debug('Error in connection', error.message);
                 }
             }
         };
@@ -29,13 +32,14 @@ class PgConnector {
     public onConnect() {
         return this.conn.connect()
             .then(obj => {
-                // Can check the server version here (pg-promise v10.1.0+):
+                // Check the server version 
                 const serverVersion = obj.client.serverVersion;
+                debug('using db version: %d',serverVersion);
                 obj.done(); // success, release the connection;
                 return serverVersion;
             })
             .catch(error => {
-                console.log('Error', error.message || error);
+                debug('Error in connecting db', error.message);
                 return error;
             });
     }
