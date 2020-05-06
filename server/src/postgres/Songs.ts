@@ -1,5 +1,5 @@
 import { tableNames, mostplayedSongsCount, mostLikeSongsCount, recentPlayedSongsCount } from '../constants/dbConstants';
-import { SONG_PLAY_EVENT_SUCCESS, SONG_LIKE_EVENT_SUCCESS } from '../constants/messages';
+import { SONG_PLAY_EVENT_SUCCESS, SONG_LIKE_EVENT_SUCCESS, SONG_UNLIKE_SUCCESS } from '../constants/messages';
 
 /**
  * This is DAO class for table 'SONGS'
@@ -83,6 +83,17 @@ class Songs {
           });
 
         return promise;
+    }
+
+    // Delete Song by song id
+    public unlikeSong(userId:number, songId:number) {
+        const query = `DELETE FROM ${tableNames.SONGS_LIKES_MAP} WHERE songId=${songId} and userId=${userId}`;
+        return this.db.any(query).then(data => {
+            return {
+                message: SONG_UNLIKE_SUCCESS,
+                success: true
+            }
+        });
     }
 
     // Delete Song by song id

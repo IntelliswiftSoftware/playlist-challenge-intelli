@@ -34,6 +34,25 @@ class PlaylistMutations {
             }
         }
     }
+
+    getDeletePlaylist(){
+        return {
+            type:  this.queryMaps.ReturnMessageType,
+            args: {
+                playlistId: { type: new GraphQLNonNull( GraphQLInt )},
+                userId: { type: new GraphQLNonNull(GraphQLInt)}
+            },
+            resolve: (parentValue, args)  => {
+                const newPlaylist: PlaylistObject = {
+                    ...args,
+                    imageId: 1 // TODO: image upload feature 
+                }
+                return this.objectFactory.getPlayListsDao().deletePlaylist(args.playlistId, args.userId);
+            }
+        }
+    }
+
+    
 }
 
 export default PlaylistMutations;

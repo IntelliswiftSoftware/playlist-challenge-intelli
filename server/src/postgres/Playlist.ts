@@ -29,6 +29,35 @@ class Playlist {
         });
     }
 
+    public deletePlaylist(playlistId: number, userId: number) {
+        
+        const query = `DELETE FROM ${tableNames.PLAYLIST} where id=${playlistId} and userId=${userId}`;
+        const deleteSongsQuery = `DELETE FROM ${tableNames.PLAYLIST_SONGS} where playlistId=${playlistId}`;
+
+    /**
+         * Return list of recent played songs by user
+         */
+        let promise = new Promise((resolve, reject) => {
+
+            this.db.any(deleteSongsQuery, null).then( data => {
+               
+                this.db.any(query).then(data => {
+                    
+                    resolve({
+                        message: 'Playlist deleted successfully',
+                        success: true
+                    });
+
+                }).catch( err => reject(err));
+
+            }).catch( err => reject(err));
+          });
+
+        return promise;
+    }
+
+    
+
     // Get playlist by user id
     public getPlaylistByUserId(id:number) {
         const query = `SELECT * FROM ${tableNames.PLAYLIST} WHERE userid = ${ id }`;
