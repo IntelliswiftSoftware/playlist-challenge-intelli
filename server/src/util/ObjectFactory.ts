@@ -1,12 +1,12 @@
 
-import DbConnector from '../postgress/PgConnector';
-import Users from '../postgress/Users';
-import Playlist from '../postgress/Playlist';
-import Songs from '../postgress/Songs';
-import Images from '../postgress/Images';
-import Artists from '../postgress/Artists';
-import PlaylistSongs from '../postgress/PlaylistSongs';
-import SongCategories from '../postgress/SongCategories';
+import DbConnector from '../postgres/PgConnector';
+import Users from '../postgres/Users';
+import Playlist from '../postgres/Playlist';
+import Songs from '../postgres/Songs';
+import Images from '../postgres/Images';
+import Artists from '../postgres/Artists';
+import PlaylistSongs from '../postgres/PlaylistSongs';
+import SongCategories from '../postgres/SongCategories';
 
 class ObjectFactory {
 

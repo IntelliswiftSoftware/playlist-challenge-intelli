@@ -1,8 +1,8 @@
 import { expect } from 'chai';
 
 import { tableNames } from '../constants/dbConstants';
-import PgConnector from '../postgress/PgConnector';
-import Images from '../postgress/Images';
+import PgConnector from '../postgres/PgConnector';
+import Images from '../postgres/Images';
 
 
 process.env.NODE_ENV = 'test';
