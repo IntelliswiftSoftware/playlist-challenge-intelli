@@ -38,7 +38,8 @@ class MutationQuery {
                 addPlaylist: this.playlistMutations.getAddPlaylist(),
                 addSongToPlaylist: this.paylistSongMutations.getAddSongToPlaylist(),
                 deleteSongFromPlaylist: this.paylistSongMutations.getDeleteSongFromPlaylist(),
-                playSong: this.songsMutations.getPlaySong()
+                playSong: this.songsMutations.getPlaySong(),
+                likeSong: this.songsMutations.getLikeSong()
             }
         })
     }

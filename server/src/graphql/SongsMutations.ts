@@ -27,6 +27,19 @@ class SongsMutations {
             }
         }
     }
+
+    getLikeSong(){
+        return {
+            type:  this.queryMaps.ReturnMessageType,
+            args: {
+                userId: { type: new GraphQLNonNull( GraphQLInt )},
+                songId: { type: new GraphQLNonNull( GraphQLInt )},
+            },
+            resolve: (parentValue, args)  => {
+                return this.objectFactory.getSongsDao().insertLikeSong(args.userId, args.songId);
+            }
+        }
+    }
 }
 
 

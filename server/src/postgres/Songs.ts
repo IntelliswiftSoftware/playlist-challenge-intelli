@@ -1,5 +1,5 @@
 import { tableNames, mostplayedSongsCount, mostLikeSongsCount, recentPlayedSongsCount } from '../constants/dbConstants';
-import { SONG_PLAY_EVENT_SUCCESS } from '../constants/messages';
+import { SONG_PLAY_EVENT_SUCCESS, SONG_LIKE_EVENT_SUCCESS } from '../constants/messages';
 
 class Songs {
     private db;
@@ -13,7 +13,43 @@ class Songs {
         VALUES ('${title}','${artistId}', '${imageId}', ${duration}, '${source}', '${genreId}',now(),${createdBy})`;
         return this.db.any(query);
     }
+    public insertLikeSong(userId: number, songId: number) {
 
+        /**
+       * Insert like song event for user, if song already exists then skip
+       */
+
+      const insertquery = `INSERT INTO ${tableNames.SONGS_LIKES_MAP} ( songId, userId, createDate )
+      VALUES (${songId}, ${userId}, now())`;
+     
+      const selectquery = `select songId from ${tableNames.SONGS_LIKES_MAP} where userId = ${userId} and songId = ${songId}`;
+     
+      let promise = new Promise((resolve, reject) => {
+
+          this.db.one(selectquery).then( Song => {
+
+            resolve( {
+                message: SONG_LIKE_EVENT_SUCCESS,
+                success: true
+            });
+
+          }).catch( err => {
+              if ( err.message === 'No data returned from the query.') {
+                  this.db.any(insertquery).then( data => {
+                      resolve( {
+                          message: SONG_LIKE_EVENT_SUCCESS,
+                          success: true
+                      });
+                  }).catch(err => reject(err));
+              }
+          });
+          
+        });
+
+      return promise;
+
+     
+  }
     public insertPlaySong(userId: number, songId: number, playCount: number) {
 
           /**
@@ -137,7 +173,12 @@ class Songs {
 
     public getSongsLiked(userId: number) {
         const query = `SELECT * FROM ${tableNames.SONGS} where id in ( select songId from ${tableNames.SONGS_LIKES_MAP} WHERE userId = ${userId})`;
-        return this.db.any(query);
+        return this.db.any(query).then(data=> {
+            return data.map( s => {
+                s['isLiked'] = true;
+                return this.setSongDuration(s);
+            })
+        });
     }
 
     public getPlayListSongsByArtist(userId: number, artistId: number) {
@@ -201,9 +242,31 @@ class Songs {
             } else {
                 s['isLiked'] = false;
             }
-            return s;
+            return this.setSongDuration(s);
         });
 
+    }
+
+    private setSongDuration(Song){
+        /**
+         * Format duation on song to display in UI
+         */
+       if ( Song.duration <= 60) {
+            Song.duration += ':00';
+       } else {
+            let secs = Song.duration%60;
+            let secsStr = ''+secs;
+            if ( secs < 10) {
+                secsStr='0'+secs;;
+            }
+            let mins = parseInt(''+(Song.duration/60));
+            let minsStr = ''+mins;
+            if ( mins < 10) {
+                minsStr='0'+mins;;
+            }
+            Song.duration = `${minsStr}:${secsStr}`;
+       }
+       return Song;
     }
 }
 export default Songs;

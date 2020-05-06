@@ -7,8 +7,8 @@ class Images {
         this.db = db;
     }
   
-    public insertImage(low, mid, high) {
-        const query = `INSERT INTO ${tableNames.IMAGES} (low, mid, high) VALUES ('${low}', '${mid}', '${high}')`;
+    public insertImage(low, mid, high, basepath) {
+        const query = `INSERT INTO ${tableNames.IMAGES} (low, mid, high, basepath) VALUES ('${low}', '${mid}', '${high}','${basepath}')`;
         return this.db.any(query);
     }
 

@@ -29,6 +29,8 @@ describe('Test App configuration', () => {
         .then( (response) => {
           expect(response.data).to.equal('Hello Welcome to playlist challenge.');
           done();
+        }).catch(err => {
+          done();
         });
     
     });

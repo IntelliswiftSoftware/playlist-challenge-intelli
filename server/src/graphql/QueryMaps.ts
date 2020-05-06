@@ -75,7 +75,7 @@ class QueryMaps {
                 id: { type: GraphQLID },
                 artistid: { type: GraphQLInt },
                 imageid: { type: GraphQLInt },
-                duration: { type: GraphQLInt },
+                duration: { type: GraphQLString },
                 source: { type: GraphQLString },
                 title: { type: GraphQLString },
                 genreid: { type: GraphQLInt },
@@ -119,7 +119,8 @@ class QueryMaps {
                 id: { type: GraphQLID },
                 low: { type: GraphQLString },
                 mid: { type: GraphQLString },
-                high: { type: GraphQLString }
+                high: { type: GraphQLString },
+                basepath: { type: GraphQLString }
             })
         });
 
@@ -151,8 +152,10 @@ class QueryMaps {
                 },
                 songs: {
                     type: new GraphQLList(this.SongType),
-                    resolve: (parentValue, args) => {    
-                        return this.objectFactory.getSongsDao().getPlayListSongsByArtist(1, parentValue.id);
+                    resolve: (parentValue, args,context, resolveInfo) => {    
+                        let userId = resolveInfo.operation.selectionSet.selections[0]['arguments'].
+                        find( a => a.name.value === 'userId' ).value.value;
+                        return this.objectFactory.getSongsDao().getPlayListSongsByArtist(userId, parentValue.id);
                     } 
                 },
             })
