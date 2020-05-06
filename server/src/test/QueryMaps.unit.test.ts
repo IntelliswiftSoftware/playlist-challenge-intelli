@@ -100,7 +100,7 @@ describe('Test QueryMaps configuration', () => {
         expect( queryMaps.SongType.getFields().imageid.type+'').to.equal('Int');
         expect( queryMaps.SongType.getFields().artistid.type+'').to.equal('Int');  
         expect( queryMaps.SongType.getFields().genreid.type+'').to.equal('Int');
-        expect( queryMaps.SongType.getFields().duration.type+'').to.equal('Int');          
+        expect( queryMaps.SongType.getFields().duration.type+'').to.equal('String');          
         expect( queryMaps.SongType.getFields().image.type+'').to.equal('Image');
         expect( queryMaps.SongType.getFields().artist.type+'').to.equal('Artist');
         expect( queryMaps.SongType.getFields().isLiked.type+'').to.equal('Boolean');

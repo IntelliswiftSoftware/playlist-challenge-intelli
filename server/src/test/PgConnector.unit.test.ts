@@ -27,9 +27,10 @@ describe('Test PgConnector methods', () => {
 
     after(function(done) {
         const query = `delete from ${tableNames.USERS} where username = '${userObject.username}' `;
-        pgConn.any(query);
-        pgConn.disconnect();
-        done();
+        pgConn.any(query).then(data=> {
+            pgConn.disconnect();
+            done();
+        });
     });
 
     it('should connect the database', (done) => { 
