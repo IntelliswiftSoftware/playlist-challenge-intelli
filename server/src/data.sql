@@ -528,9 +528,9 @@ VALUES ('Main Chowdhuri Baldeb', 3, 48, 270, 'https://pwdown.com/113457/variatio
 
 INSERT INTO songs (title, artistId, imageId, duration, source, genreId, createDate, createdBy) 
 VALUES ('Main Yahan Tumhe Apni Dulhan', 1, 49, 250, 'https://pwdown.com/113457/variation/190K/Bezubaan%20Kab%20Se%20-%20Street%20Dancer%203D.mp3', 1, now(), 1);
-
+    
 INSERT INTO songs (title, artistId, imageId, duration, source, genreId, createDate, createdBy) 
-VALUES ('Rim Jhim Rim Jhim', 36, , 270, 'https://pwdown.com/113457/variation/190K/Bezubaan%20Kab%20Se%20-%20Street%20Dancer%203D.mp3', 4, now(), 1);
+VALUES ('Rim Jhim Rim Jhim', 4, 36, 270, 'https://pwdown.com/113457/variation/190K/Bezubaan%20Kab%20Se%20-%20Street%20Dancer%203D.mp3', 4, now(), 1);
 
 INSERT INTO songs (title, artistId, imageId, duration, source, genreId, createDate, createdBy) 
 VALUES ('Kuchh Na Kaho (Happy)', 4, 37, 220, 'https://pwdown.com/113457/variation/190K/Bezubaan%20Kab%20Se%20-%20Street%20Dancer%203D.mp3', 4, now(), 1);
