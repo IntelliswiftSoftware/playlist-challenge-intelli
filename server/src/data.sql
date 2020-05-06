@@ -167,7 +167,7 @@ INSERT INTO images (low, mid, high, basepath) VALUES (
 INSERT INTO images (low, mid, high, basepath) VALUES (
 'moods/low/patriotic_med.png', 
 'moods/mid/patriotic_med.png', 
-'moods/high/patriotic_med.png',
+'moods/high/patriotic_high.png',
 'https://samsungdemos3.s3.amazonaws.com/Images/'
 );
 

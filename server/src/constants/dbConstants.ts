@@ -16,7 +16,7 @@ export const tableNames = {
 export const connectionObject = {
     host: 'samsungdemo.czetxvdsehbl.us-east-1.rds.amazonaws.com',
     port: 5432,
-    database: 'samsungdemo',
+    database: 'samsungdemo_new',
     user: 'postgres',
     password: 'SamsungDemo$123',
     max: 30,

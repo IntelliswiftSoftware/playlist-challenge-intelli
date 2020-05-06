@@ -28,7 +28,7 @@ class PlaylistMutations {
             resolve: (parentValue, args)  => {
                 const newPlaylist: PlaylistObject = {
                     ...args,
-                    imageId: 1
+                    imageId: 1 // TODO: image upload feature 
                 }
                 return this.objectFactory.getPlayListsDao().insertPlaylist(newPlaylist);
             }
