@@ -398,8 +398,8 @@ INSERT INTO images (low, mid, high, basepath) VALUES (
 );
 
 
-INSERT INTO users (username, firstname, lastname, password, age, gender, imageId, createDate) VALUES ('tom123', 'Tom', 'Hanks', 'test', 40, 'Male', 1, now());
-INSERT INTO users (username, firstname, lastname, password, age, gender, imageId, createDate) VALUES ('jomi123','jomi', 'banks', 'best', 40, 'Female', 1, now());
+INSERT INTO users (username, firstname, lastname, password, age, gender, imageId, createDate) VALUES ('rifeyn', 'Richard', 'Feynman', 'test', 40, 'Male', 1, now());
+INSERT INTO users (username, firstname, lastname, password, age, gender, imageId, createDate) VALUES ('cvraman','CV', 'Raman', 'best', 40, 'Male', 1, now());
 
 
 INSERT INTO playlists (title, userId, imageId, createDate, modifiedDate) VALUES ('90 Songs', 1, 1, now(), now());
@@ -440,10 +440,10 @@ INSERT INTO artists (firstname, lastname, gender, imageId, createDate) VALUES ('
 INSERT INTO artists (firstname, lastname, gender, imageId, createDate) VALUES ('Neha', 'kakar', 'male', 9, now());
 
 INSERT INTO songs (title, artistId, imageId, duration, source, genreId, createDate, createdBy) 
-VALUES ('tere nam', 1, 35, 50, 'https://pwdown.com/113457/variation/190K/Bezubaan%20Kab%20Se%20-%20Street%20Dancer%203D.mp3', 1, now(), 1);
+VALUES ('Tere nam', 1, 35, 50, 'https://pwdown.com/113457/variation/190K/Bezubaan%20Kab%20Se%20-%20Street%20Dancer%203D.mp3', 1, now(), 1);
 
 INSERT INTO songs (title, artistId, imageId, duration, source, genreId, createDate) 
-VALUES ('mere nam', 1, 36, 60, 'https://pwdown.com/113457/variation/190K/Bezubaan%20Kab%20Se%20-%20Street%20Dancer%203D.mp3', 1, now());
+VALUES ('Mere nam', 1, 36, 60, 'https://pwdown.com/113457/variation/190K/Bezubaan%20Kab%20Se%20-%20Street%20Dancer%203D.mp3', 1, now());
 
 INSERT INTO songs (title, artistId, imageId, duration, source, genreId, createDate, createdBy) 
 VALUES ('Tu jane na', 1, 37, 70, 'https://pwdown.com/113457/variation/190K/Bezubaan%20Kab%20Se%20-%20Street%20Dancer%203D.mp3', 1, now(), 1);
@@ -452,7 +452,7 @@ INSERT INTO songs (title, artistId, imageId, duration, source, genreId, createDa
 VALUES ('Julwa', 1, 38, 80, 'https://pwdown.com/113457/variation/190K/Bezubaan%20Kab%20Se%20-%20Street%20Dancer%203D.mp3', 1, now());
 
 INSERT INTO songs (title, artistId, imageId, duration, source, genreId, createDate, createdBy) 
-VALUES ('nazar ke samne', 1, 39, 90, 'https://pwdown.com/113457/variation/190K/Bezubaan%20Kab%20Se%20-%20Street%20Dancer%203D.mp3', 1, now(), 1);
+VALUES ('Nazar ke samne', 1, 39, 90, 'https://pwdown.com/113457/variation/190K/Bezubaan%20Kab%20Se%20-%20Street%20Dancer%203D.mp3', 1, now(), 1);
 
 INSERT INTO songs (title, artistId, imageId, duration, source, genreId, createDate) 
 VALUES ('Ghar se nikalte hi', 1, 40, 100, 'https://pwdown.com/113457/variation/190K/Bezubaan%20Kab%20Se%20-%20Street%20Dancer%203D.mp3', 1, now());
