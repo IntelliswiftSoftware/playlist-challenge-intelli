@@ -1,5 +1,10 @@
 import { tableNames } from '../constants/dbConstants';
 
+
+/**
+ * This is DAO class for table 'IMAGES'
+ */
+
 class Images {
     private db;
 

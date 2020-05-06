@@ -1,5 +1,9 @@
 import { tableNames } from '../constants/dbConstants';
 
+/**
+ * This is DAO class for table 'ARTISTS'
+ */
+
 class Artists {
     private db;
     constructor(db) {

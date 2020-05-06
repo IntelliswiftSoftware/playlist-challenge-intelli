@@ -1,6 +1,10 @@
 import { tableNames, mostplayedSongsCount, mostLikeSongsCount, recentPlayedSongsCount } from '../constants/dbConstants';
 import { SONG_PLAY_EVENT_SUCCESS, SONG_LIKE_EVENT_SUCCESS } from '../constants/messages';
 
+/**
+ * This is DAO class for table 'SONGS'
+ */
+
 class Songs {
     private db;
 

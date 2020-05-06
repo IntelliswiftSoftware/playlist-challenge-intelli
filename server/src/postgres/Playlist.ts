@@ -5,6 +5,10 @@ const debug = debugLib('Playlist');
 import { tableNames } from '../constants/dbConstants';
 import PlaylistObject from '../interfaces/PlaylistObject';
 
+/**
+ * This is DAO class for table 'PLAYLISTS'
+ */
+
 class Playlist {
     private db;
     constructor(db) {

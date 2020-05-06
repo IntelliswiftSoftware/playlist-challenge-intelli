@@ -7,6 +7,10 @@ const debug = debugLib('PgConnector');
 
 import { connectionObject, paginationConfig } from '../constants/dbConstants';
 
+/**
+ * This class manages the connection with database.
+ * This class implements the core methods to query database.
+ */
 
 class PgConnector {
     public conn;
@@ -87,7 +91,7 @@ class PgConnector {
         return this.processDbResult(this.conn.one(query), null);
     }
 
-    private multiInsert(queries:Array<string>) {
+    public multiInsert(queries:Array<string>) {
         let promise = new Promise((resolve, reject) => {
             parallel(queries.map((query) => {
                 return (callback) => {

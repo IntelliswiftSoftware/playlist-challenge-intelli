@@ -7,6 +7,10 @@ import { USERNAME_EXISTS_MESSAGE, USER_ADD_SUCCESS_MESSAGE } from '../constants/
 
 import UserObject from '../interfaces/UserObject';
 
+/**
+ * This is DAO class for table 'USERS'
+ */
+
 class Users {
     private db;
 

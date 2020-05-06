@@ -5,6 +5,9 @@ const debug = debugLib('PlaylistSongs');
 import { tableNames } from '../constants/dbConstants';
 import { SONG_ADD_SUCCESS_MESSAGE, SONG_DELETE_SUCCESS_MESSAGE } from '../constants/messages';
 
+/**
+ * This is DAO class for table 'PLAYLIST_SONGS'
+ */
 
 class PlaylistSongs {
     private db;
