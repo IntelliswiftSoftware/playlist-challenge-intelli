@@ -709,6 +709,107 @@ VALUES ('Woh Lamhe Woh Baatein', 9, 38, 250, 'https://pwdown.com/113457/variatio
 INSERT INTO songs (title, artistId, imageId, duration, source, genreId, createDate, createdBy) 
 VALUES ('Agar Tum Mil Jao', 9, 39, 150, 'https://pwdown.com/113457/variation/190K/Bezubaan%20Kab%20Se%20-%20Street%20Dancer%203D.mp3', 9, now(), 1);
 
+INSERT INTO songs (title, artistId, imageId, duration, source, genreId, createDate, createdBy) 
+VALUES ('The Ringer', 5, 5, 120, 'https://pwdown.com/113457/variation/190K/Bezubaan%20Kab%20Se%20-%20Street%20Dancer%203D.mp3', 1, now(), 1);
+
+INSERT INTO songs (title, artistId, imageId, duration, source, genreId, createDate) 
+VALUES ('Greatest', 5, 5, 120, 'https://pwdown.com/113457/variation/190K/Bezubaan%20Kab%20Se%20-%20Street%20Dancer%203D.mp3', 1, now());
+
+INSERT INTO songs (title, artistId, imageId, duration, source, genreId, createDate, createdBy) 
+VALUES ('Good Guy', 5, 5, 120, 'https://pwdown.com/113457/variation/190K/Bezubaan%20Kab%20Se%20-%20Street%20Dancer%203D.mp3', 1, now(), 1);
+
+INSERT INTO songs (title, artistId, imageId, duration, source, genreId, createDate) 
+VALUES ('Lucky You', 5, 5, 120, 'https://pwdown.com/113457/variation/190K/Bezubaan%20Kab%20Se%20-%20Street%20Dancer%203D.mp3', 1, now());
+
+INSERT INTO songs (title, artistId, imageId, duration, source, genreId, createDate, createdBy) 
+VALUES ('Paul (Skit)', 5, 5, 120, 'https://pwdown.com/113457/variation/190K/Bezubaan%20Kab%20Se%20-%20Street%20Dancer%203D.mp3', 1, now(), 1);
+
+INSERT INTO songs (title, artistId, imageId, duration, source, genreId, createDate) 
+VALUES ('Em Calls Paul (Skit)', 5, 5, 120, 'https://pwdown.com/113457/variation/190K/Bezubaan%20Kab%20Se%20-%20Street%20Dancer%203D.mp3', 1, now());
+
+INSERT INTO songs (title, artistId, imageId, duration, source, genreId, createDate, createdBy) 
+VALUES ('Stepping Stone', 5, 5, 120, 'https://pwdown.com/113457/variation/190K/Bezubaan%20Kab%20Se%20-%20Street%20Dancer%203D.mp3', 1, now(), 1);
+
+INSERT INTO songs (title, artistId, imageId, duration, source, genreId, createDate) 
+VALUES ('Not Alike', 5, 5, 120, 'https://pwdown.com/113457/variation/190K/Bezubaan%20Kab%20Se%20-%20Street%20Dancer%203D.mp3', 1, now());
+
+INSERT INTO songs (title, artistId, imageId, duration, source, genreId, createDate, createdBy) 
+VALUES ('Dont Wanna Know', 5, 5, 120, 'https://pwdown.com/113457/variation/190K/Bezubaan%20Kab%20Se%20-%20Street%20Dancer%203D.mp3', 1, now(), 1);
+
+INSERT INTO songs (title, artistId, imageId, duration, source, genreId, createDate) 
+VALUES ('One More Night', 5, 5, 120, 'https://pwdown.com/113457/variation/190K/Bezubaan%20Kab%20Se%20-%20Street%20Dancer%203D.mp3', 1, now());
+
+INSERT INTO songs (title, artistId, imageId, duration, source, genreId, createDate, createdBy) 
+VALUES ('Cold', 6, 6, 120, 'https://pwdown.com/113457/variation/190K/Bezubaan%20Kab%20Se%20-%20Street%20Dancer%203D.mp3', 1, now(), 1);
+
+INSERT INTO songs (title, artistId, imageId, duration, source, genreId, createDate) 
+VALUES ('Maps', 6, 6, 120, 'https://pwdown.com/113457/variation/190K/Bezubaan%20Kab%20Se%20-%20Street%20Dancer%203D.mp3', 1, now());
+
+INSERT INTO songs (title, artistId, imageId, duration, source, genreId, createDate, createdBy) 
+VALUES ('She will be loved', 6, 6, 120, 'https://pwdown.com/113457/variation/190K/Bezubaan%20Kab%20Se%20-%20Street%20Dancer%203D.mp3', 1, now(), 1);
+
+INSERT INTO songs (title, artistId, imageId, duration, source, genreId, createDate) 
+VALUES ('Unkiss Me', 6, 6, 120, 'https://pwdown.com/113457/variation/190K/Bezubaan%20Kab%20Se%20-%20Street%20Dancer%203D.mp3', 1, now());
+
+INSERT INTO songs (title, artistId, imageId, duration, source, genreId, createDate, createdBy) 
+VALUES ('Wont Go Home Without You', 6, 6, 120, 'https://pwdown.com/113457/variation/190K/Bezubaan%20Kab%20Se%20-%20Street%20Dancer%203D.mp3', 1, now(), 1);
+
+INSERT INTO songs (title, artistId, imageId, duration, source, genreId, createDate) 
+VALUES ('Moves Like Jagger', 6, 6, 120, 'https://pwdown.com/113457/variation/190K/Bezubaan%20Kab%20Se%20-%20Street%20Dancer%203D.mp3', 1, now());
+
+INSERT INTO songs (title, artistId, imageId, duration, source, genreId, createDate, createdBy) 
+VALUES ('Lost Stars', 6, 6, 120, 'https://pwdown.com/113457/variation/190K/Bezubaan%20Kab%20Se%20-%20Street%20Dancer%203D.mp3', 1, now(), 1);
+
+INSERT INTO songs (title, artistId, imageId, duration, source, genreId, createDate) 
+VALUES ('Not Coming Home', 6, 6, 120, 'https://pwdown.com/113457/variation/190K/Bezubaan%20Kab%20Se%20-%20Street%20Dancer%203D.mp3', 1, now());
+
+INSERT INTO songs (title, artistId, imageId, duration, source, genreId, createDate, createdBy) 
+VALUES ('Secret', 6, 6, 120, 'https://pwdown.com/113457/variation/190K/Bezubaan%20Kab%20Se%20-%20Street%20Dancer%203D.mp3', 1, now(), 1);
+
+INSERT INTO songs (title, artistId, imageId, duration, source, genreId, createDate) 
+VALUES ('Payphone', 6, 6, 120, 'https://pwdown.com/113457/variation/190K/Bezubaan%20Kab%20Se%20-%20Street%20Dancer%203D.mp3', 1, now());
+
+
+INSERT INTO songs (title, artistId, imageId, duration, source, genreId, createDate, createdBy) 
+VALUES ('My Paper Heart', 6, 6, 120, 'https://pwdown.com/113457/variation/190K/Bezubaan%20Kab%20Se%20-%20Street%20Dancer%203D.mp3', 1, now(), 1);
+
+INSERT INTO songs (title, artistId, imageId, duration, source, genreId, createDate) 
+VALUES ('Your Star', 6, 6, 120, 'https://pwdown.com/113457/variation/190K/Bezubaan%20Kab%20Se%20-%20Street%20Dancer%203D.mp3', 1, now());
+
+INSERT INTO songs (title, artistId, imageId, duration, source, genreId, createDate, createdBy) 
+VALUES ('Swing, Swing', 6, 6, 120, 'https://pwdown.com/113457/variation/190K/Bezubaan%20Kab%20Se%20-%20Street%20Dancer%203D.mp3', 1, now(), 1);
+
+INSERT INTO songs (title, artistId, imageId, duration, source, genreId, createDate) 
+VALUES ('Time Stands Still', 6, 6, 120, 'https://pwdown.com/113457/variation/190K/Bezubaan%20Kab%20Se%20-%20Street%20Dancer%203D.mp3', 1, now());
+
+INSERT INTO songs (title, artistId, imageId, duration, source, genreId, createDate, createdBy) 
+VALUES ('One More Sad Song', 6, 6, 120, 'https://pwdown.com/113457/variation/190K/Bezubaan%20Kab%20Se%20-%20Street%20Dancer%203D.mp3', 1, now(), 1);
+
+INSERT INTO songs (title, artistId, imageId, duration, source, genreId, createDate) 
+VALUES ('Why Worry', 6, 6, 120, 'https://pwdown.com/113457/variation/190K/Bezubaan%20Kab%20Se%20-%20Street%20Dancer%203D.mp3', 1, now());
+
+INSERT INTO songs (title, artistId, imageId, duration, source, genreId, createDate, createdBy) 
+VALUES ('Dont Leave Me', 6, 6, 120, 'https://pwdown.com/113457/variation/190K/Bezubaan%20Kab%20Se%20-%20Street%20Dancer%203D.mp3', 1, now(), 1);
+
+INSERT INTO songs (title, artistId, imageId, duration, source, genreId, createDate) 
+VALUES ('Too Far Gone', 6, 6, 120, 'https://pwdown.com/113457/variation/190K/Bezubaan%20Kab%20Se%20-%20Street%20Dancer%203D.mp3', 1, now());
+
+INSERT INTO songs (title, artistId, imageId, duration, source, genreId, createDate, createdBy) 
+VALUES ('Drive Away', 6, 6, 120, 'https://pwdown.com/113457/variation/190K/Bezubaan%20Kab%20Se%20-%20Street%20Dancer%203D.mp3', 1, now(), 1);
+
+INSERT INTO songs (title, artistId, imageId, duration, source, genreId, createDate) 
+VALUES ('Happy Endings', 5, 5, 120, 'https://pwdown.com/113457/variation/190K/Bezubaan%20Kab%20Se%20-%20Street%20Dancer%203D.mp3', 1, now());
+
+INSERT INTO songs (title, artistId, imageId, duration, source, genreId, createDate) 
+VALUES ('Too Far Gone', 5, 5, 120, 'https://pwdown.com/113457/variation/190K/Bezubaan%20Kab%20Se%20-%20Street%20Dancer%203D.mp3', 1, now());
+
+INSERT INTO songs (title, artistId, imageId, duration, source, genreId, createDate, createdBy) 
+VALUES ('Drive Away', 5, 5, 120, 'https://pwdown.com/113457/variation/190K/Bezubaan%20Kab%20Se%20-%20Street%20Dancer%203D.mp3', 1, now(), 1);
+
+INSERT INTO songs (title, artistId, imageId, duration, source, genreId, createDate) 
+VALUES ('Happy Endings', 5, 5, 120, 'https://pwdown.com/113457/variation/190K/Bezubaan%20Kab%20Se%20-%20Street%20Dancer%203D.mp3', 1, now());
+
+
 INSERT INTO album (title, imageId, createDate) VALUES ('Dilwale Dulhania Le Jayenge', 57, now());
 INSERT INTO album (title, imageId, createDate) VALUES ('1942 A Love Story', 56, now());
 INSERT INTO album (title, imageId, createDate) VALUES ('Ajanabee', 55, now());
