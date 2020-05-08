@@ -9,20 +9,21 @@ process.env.NODE_ENV = 'test';
 
 let pgConn;
 let songCategoriesDao;
-let songObject = {
-    title:'unittestsong',
-    artistId: 1,
-    source:'unit test source',
-    genreId: 1,
-    duration:22,
-    imageId:1
-}
 
+const connectionObject = {
+    host: process.env.RDS_HOST,
+    port: process.env.RDS_PORT,
+    database: process.env.RDS_DATABASE_NAME,
+    user: process.env.RDS_DATABASE_USER,
+    password: process.env.RDS_DATABASE_PASSWORD,
+    max: parseInt(process.env.RDS_MAX_CONNECTIONS) || 30,
+    poolIdleTimeout: parseInt(process.env.RDS_POOL_TIMEOUT) || 10000
+}
 
 describe('Test Songs methods', () => {
 
     before(function(done) {
-        pgConn =  new PgConnector();
+        pgConn =  new PgConnector(connectionObject);
         songCategoriesDao = new SongCategories(pgConn);  
         done();
     });
