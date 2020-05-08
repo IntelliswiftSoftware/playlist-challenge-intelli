@@ -1,5 +1,8 @@
+import debugLib from 'debug';
+const debug = debugLib('SongsDao');
+
 import { tableNames, mostplayedSongsCount, mostLikeSongsCount, recentPlayedSongsCount } from '../constants/dbConstants';
-import { SONG_PLAY_EVENT_SUCCESS, SONG_LIKE_EVENT_SUCCESS, SONG_UNLIKE_SUCCESS } from '../constants/messages';
+import { SONG_PLAY_EVENT_SUCCESS, SONG_LIKE_EVENT_SUCCESS, SONG_UNLIKE_SUCCESS, SONG_LIKE_EVENT_FAILED} from '../constants/messages';
 
 /**
  * This is DAO class for table 'SONGS'
@@ -17,37 +20,35 @@ class Songs {
         VALUES ('${title}','${artistId}', '${imageId}', ${duration}, '${source}', '${genreId}',now(),${createdBy})`;
         return this.db.any(query);
     }
-    public insertLikeSong(userId: number, songId: number) {
-
+    
+    
+     public async insertLikeSong(userId: number, songId: number) {
         /**
        * Insert like song event for user, if song already exists then skip
        */
-
-      const insertquery = `INSERT INTO ${tableNames.SONGS_LIKES_MAP} ( songId, userId, createDate )
-      VALUES (${songId}, ${userId}, now())`;
-      const selectquery = `SELECT songId FROM ${tableNames.SONGS_LIKES_MAP} WHERE userId = ${userId} AND songId = ${songId}`;
-      let promise = new Promise((resolve, reject) => {
-
-          this.db.one(selectquery).then( Song => {
-
-            resolve( {
+        try {
+            const selectquery = `SELECT songId FROM ${tableNames.SONGS_LIKES_MAP} WHERE userId = ${userId} AND songId = ${songId}`;
+            let selectResult = await this.db.any(selectquery);
+            debug('select like song for userId:%d and songId:%d result: ',userId, songId, selectResult);
+    
+            if ( selectResult.length === 0 )  {
+                const insertquery = `INSERT INTO ${tableNames.SONGS_LIKES_MAP} ( songId, userId, createDate )
+                VALUES (${songId}, ${userId}, now())`;
+                let insertResult = await this.db.any(insertquery);
+                debug('insert like song for userId:%d and songId:%d result: ',userId, songId, insertResult)
+            }
+            return {
                 message: SONG_LIKE_EVENT_SUCCESS,
                 success: true
-            });
+            };
+        } catch (err) {
+            debug('Error in insert like song err: %s', err.message)
+            return {
+                message: SONG_LIKE_EVENT_FAILED,
+                success: true
+            };
+        }
 
-          }).catch( err => {
-              if ( err.message === 'No data returned from the query.') {
-                  this.db.any(insertquery).then( data => {
-                      resolve( {
-                          message: SONG_LIKE_EVENT_SUCCESS,
-                          success: true
-                      });
-                  }).catch(err => reject(err));
-              }
-          });
-        });
-
-      return promise;
   }
     public insertPlaySong(userId: number, songId: number, playCount: number) {
 

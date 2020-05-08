@@ -4,4 +4,5 @@ export const USER_ADD_SUCCESS_MESSAGE = 'User added successfully';
 export const SONG_ADD_SUCCESS_MESSAGE = 'Song added successfully into playlist';
 export const SONG_DELETE_SUCCESS_MESSAGE = 'Song deleted successfully from playlist';
 export const SONG_LIKE_EVENT_SUCCESS = 'Like event stored successfully';
+export const SONG_LIKE_EVENT_FAILED = 'Could not save Like event, try again later';
 export const SONG_UNLIKE_SUCCESS = 'Song unliked sucessfully';
