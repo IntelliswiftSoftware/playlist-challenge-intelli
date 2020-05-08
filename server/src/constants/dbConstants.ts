@@ -14,13 +14,13 @@ export const tableNames = {
 }
 
 export const connectionObject = {
-    host: 'samsungdemo.czetxvdsehbl.us-east-1.rds.amazonaws.com',
-    port: 5432,
-    database: 'samsungdemo_new',
-    user: 'postgres',
-    password: 'SamsungDemo$123',
-    max: 30,
-    poolIdleTimeout: 10000 
+    host: process.env.RDS_HOST,
+    port: process.env.RDS_PORT,
+    database: process.env.RDS_DATABASE_NAME,
+    user: process.env.RDS_DATABASE_USER,
+    password: process.env.RDS_DATABASE_PASSWORD,
+    max: parseInt(process.env.RDS_MAX_CONNECTIONS) || 30,
+    poolIdleTimeout: parseInt(process.env.RDS_POOL_TIMEOUT) || 10000
 }
 
 export const recentPlayedSongsCount = 20;

@@ -3,33 +3,22 @@ import { expect } from 'chai';
 
 import PgConnector from '../postgres/PgConnector';
 import SongCategories from '../postgres/SongCategories';
-import { tableNames } from '../constants/dbConstants';
+import { connectionObject } from '../constants/dbConstants';
 
 process.env.NODE_ENV = 'test';
 
 let pgConn;
 let songCategoriesDao;
-let songObject = {
-    title:'unittestsong',
-    artistId: 1,
-    source:'unit test source',
-    genreId: 1,
-    duration:22,
-    imageId:1
-}
 
-
-describe('Test Songs methods', () => {
+describe('Test SongCategories methods', () => {
 
     before(function(done) {
-        pgConn =  new PgConnector();
+        pgConn =  PgConnector.getInstance(connectionObject);
         songCategoriesDao = new SongCategories(pgConn);  
         done();
     });
 
     after(function(done) {
-      
-        pgConn.disconnect();
         done();
     });
 

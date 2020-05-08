@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 
-import { tableNames } from '../constants/dbConstants';
+import { tableNames, connectionObject } from '../constants/dbConstants';
 import PgConnector from '../postgres/PgConnector';
 import Images from '../postgres/Images';
 
@@ -16,24 +16,18 @@ let imageObject = {
     basepath: 'test basepath'
 }
 
-
 describe('Test Images methods', () => {
 
     before(function(done) {
-        pgConn =  new PgConnector();
+        pgConn =  PgConnector.getInstance(connectionObject);
         imageDao = new Images(pgConn);  
         done();
     });
 
     after(function(done) {
         const query = `delete from ${tableNames.IMAGES} where low = '${imageObject.low}' `;
-        pgConn.any(query).then(data => {
-            pgConn.disconnect();
-            done();
-        }).catch(err => {
-            pgConn.disconnect();
-            done();
-        });
+        pgConn.any(query);
+        done();
     });
 
     it('should insert image ', (done) => { 

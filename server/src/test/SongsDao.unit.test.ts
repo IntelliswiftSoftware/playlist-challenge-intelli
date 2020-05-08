@@ -3,7 +3,7 @@ import { expect } from 'chai';
 
 import PgConnector from '../postgres/PgConnector';
 import Songs from '../postgres/Songs';
-import { tableNames } from '../constants/dbConstants';
+import { tableNames, connectionObject } from '../constants/dbConstants';
 
 process.env.NODE_ENV = 'test';
 
@@ -18,24 +18,18 @@ let songObject = {
     imageId:1
 }
 
-
 describe('Test Songs methods', () => {
 
     before(function(done) {
-        pgConn =  new PgConnector();
+        pgConn =  PgConnector.getInstance(connectionObject);
         songDao = new Songs(pgConn);  
         done();
     });
 
     after(function(done) {
         const query = `delete from ${tableNames.SONGS} where title = '${songObject.title}' `;
-        pgConn.any(query).then(data => {
-            pgConn.disconnect();
-            done();
-        }).catch(err => {
-            pgConn.disconnect();
-            done();
-        });
+        pgConn.any(query);
+        done();
     });
 
     it('should insert new song', (done) => { 

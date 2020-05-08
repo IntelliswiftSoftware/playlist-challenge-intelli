@@ -2,7 +2,7 @@ import { expect } from 'chai';
 
 
 import PgConnector from '../postgres/PgConnector';
-import { tableNames } from '../constants/dbConstants';
+import { tableNames, connectionObject } from '../constants/dbConstants';
 
 process.env.NODE_ENV = 'test';
 
@@ -21,16 +21,14 @@ let userObject = {
 describe('Test PgConnector methods', () => {
 
     before(function(done) {
-        pgConn =  new PgConnector();      
+        pgConn =  PgConnector.getInstance(connectionObject);   
         done();
     });
 
     after(function(done) {
         const query = `delete from ${tableNames.USERS} where username = '${userObject.username}' `;
-        pgConn.any(query).then(data=> {
-            pgConn.disconnect();
-            done();
-        });
+        pgConn.any(query);
+        done();
     });
 
     it('should connect the database', (done) => { 

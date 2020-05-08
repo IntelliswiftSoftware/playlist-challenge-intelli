@@ -5,7 +5,7 @@ import debugLib from 'debug';
 
 const debug = debugLib('PgConnector');
 
-import { connectionObject, paginationConfig } from '../constants/dbConstants';
+import { paginationConfig } from '../constants/dbConstants';
 
 /**
  * This class manages the connection with database.
@@ -13,9 +13,10 @@ import { connectionObject, paginationConfig } from '../constants/dbConstants';
  */
 
 class PgConnector {
+    private static instance: PgConnector;
     public conn;
     private pgp;
-    constructor() {
+    constructor(connectionObject) {
         const initOptions = {
             error(error, e) {
                 if (e.cn) {
@@ -26,6 +27,14 @@ class PgConnector {
         this.pgp = pgPromise(initOptions);
         this.conn = this.pgp(connectionObject);
         this.onConnect();
+    }
+
+    public static getInstance(connectionObject): PgConnector {
+        if (!PgConnector.instance) {
+            PgConnector.instance = new PgConnector(connectionObject);
+        }
+
+        return PgConnector.instance;
     }
 
     public disconnect(){

@@ -8,6 +8,8 @@ import Artists from '../postgres/Artists';
 import PlaylistSongs from '../postgres/PlaylistSongs';
 import SongCategories from '../postgres/SongCategories';
 
+import { connectionObject } from '../constants/dbConstants';
+
 
 /**
  * The aim of this class is to create new instance of classes and provide accrosss application.
@@ -24,15 +26,13 @@ class ObjectFactory {
     private ImagesDao : Images;
     private ArtistsDao: Artists;
     private SongCategoriesDao: SongCategories;
-
-
+    
     constructor(){
-        this.db = new DbConnector();
+        this.db = DbConnector.getInstance(connectionObject);
     }
 
-
     public destroy(){
-        this.db.disconnect();
+        // TBD
     }
     
     getDbInstance(){
