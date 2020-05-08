@@ -13,6 +13,7 @@ import { paginationConfig } from '../constants/dbConstants';
  */
 
 class PgConnector {
+    private static instance: PgConnector;
     public conn;
     private pgp;
     constructor(connectionObject) {
@@ -26,6 +27,14 @@ class PgConnector {
         this.pgp = pgPromise(initOptions);
         this.conn = this.pgp(connectionObject);
         this.onConnect();
+    }
+
+    public static getInstance(connectionObject): PgConnector {
+        if (!PgConnector.instance) {
+            PgConnector.instance = new PgConnector(connectionObject);
+        }
+
+        return PgConnector.instance;
     }
 
     public disconnect(){

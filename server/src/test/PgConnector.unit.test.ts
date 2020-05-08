@@ -2,7 +2,7 @@ import { expect } from 'chai';
 
 
 import PgConnector from '../postgres/PgConnector';
-import { tableNames } from '../constants/dbConstants';
+import { tableNames, connectionObject } from '../constants/dbConstants';
 
 process.env.NODE_ENV = 'test';
 
@@ -17,30 +17,18 @@ let userObject = {
     imageId:1
 }
 
-const connectionObject = {
-    host: process.env.RDS_HOST,
-    port: process.env.RDS_PORT,
-    database: process.env.RDS_DATABASE_NAME,
-    user: process.env.RDS_DATABASE_USER,
-    password: process.env.RDS_DATABASE_PASSWORD,
-    max: parseInt(process.env.RDS_MAX_CONNECTIONS) || 30,
-    poolIdleTimeout: parseInt(process.env.RDS_POOL_TIMEOUT) || 10000
-}
-
 
 describe('Test PgConnector methods', () => {
 
     before(function(done) {
-        pgConn =  new PgConnector(connectionObject);      
+        pgConn =  PgConnector.getInstance(connectionObject);   
         done();
     });
 
     after(function(done) {
         const query = `delete from ${tableNames.USERS} where username = '${userObject.username}' `;
-        pgConn.any(query).then(data=> {
-            pgConn.disconnect();
-            done();
-        });
+        pgConn.any(query);
+        done();
     });
 
     it('should connect the database', (done) => { 

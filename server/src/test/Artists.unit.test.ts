@@ -24,13 +24,12 @@ const connectionObject = {
 describe('Test Artists methods', () => {
 
     before(function(done) {
-        pgConn =  new PgConnector(connectionObject);
+        pgConn =  PgConnector.getInstance(connectionObject);
         artistsDao = new Artists(pgConn);  
         done();
     });
 
     after(function(done) {
-        pgConn.disconnect();
         done();
     });
 
