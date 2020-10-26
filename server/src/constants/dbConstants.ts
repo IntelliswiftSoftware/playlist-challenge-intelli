@@ -13,12 +13,23 @@ export const tableNames = {
     SONGS_MOOD_MAP:'songs_moods_map'
 }
 
+// Configuration for getting connected to RDS instance.
+// export const connectionObject = {
+//     host: 'samsungdemo.czetxvdsehbl.us-east-1.rds.amazonaws.com',
+//     port: 5432,
+//     database: 'samsungdemo_new',
+//     user: 'postgres',
+//     password: 'SamsungDemo$123',
+//     max: 30,
+//     poolIdleTimeout: 10000 
+// }
+
 export const connectionObject = {
-    host: 'samsungdemo.czetxvdsehbl.us-east-1.rds.amazonaws.com',
+    host: 'localhost',
     port: 5432,
-    database: 'samsungdemo_new',
+    database: 'song_playlist',
     user: 'postgres',
-    password: 'SamsungDemo$123',
+    password: 'root',
     max: 30,
     poolIdleTimeout: 10000 
 }
